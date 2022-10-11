@@ -17,10 +17,10 @@
 		<!-- lookup parent from repository -->
 	</parent>
 	<groupId>
-		com.example
+		webg5
 	</groupId>
 	<artifactId>
-		pae
+		rest
 	</artifactId>
 	<version>
 		0.0.1-SNAPSHOT
@@ -106,6 +106,14 @@
 			</groupId>
 			<artifactId>
 				spring-boot-starter-validation
+			</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>
+				com.fasterxml.jackson.core
+			</groupId>
+			<artifactId>
+				jackson-databind
 			</artifactId>
 		</dependency>
 	</dependencies>

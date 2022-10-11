@@ -1,30 +1,22 @@
 <html>
 
-<head>
-    <title>PAE</title>
+<head th:replace="~{layout.html::head(titre='Cours')}">
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 </head>
 
-<body bgcolor="FFFFFF">
-    <header class="bg-blue-400 py-5 px-15 font-bold">
-        <div class="grid grid-cols-2 gap-4 flex justify-between items-center gap-x-5 place-content-center">
-            <div>
-                <div class="text-2xl underline">
-                    Programme annuel des étudiants
-                </div>
-                HE2B - ESI - WEBG5 - JLC
-            </div>
-            <div>
-                <img th:src="@{/pictures/ESI.jpeg}" alt="ESILogo" class="w-35">
-            </div>
-        </div>
+<body>
+    <header th:replace="~{layout.html::header}">
     </header>
 
-    <div class="grid grid-cols-2 gap-4">
-        <div>
+    <div class="grid grid-cols-3 gap-4">
+        <div></div>
+        <div th:if="${#lists.isEmpty(coursesList)}">
+            (Aucun cours)
+        </div>
+        <div th:if="${!#lists.isEmpty(coursesList)}">
             <table class="table table-bordered">
                 <tr>
                     <th>Sigle</th>
@@ -32,16 +24,35 @@
                     <th>ECTS</th>
                 </tr>
                 <tr th:each="course : ${coursesList}">
-                    <td th:text="${course.id}">ID</td>
-                    <td th:text="${course.title}">Titre</td>
+                    <td><a th:href="@{/courses(courseId=${course.id})}" th:text="${course.id}">ID</a></td>
+                    <td><a th:href="@{/courses(courseId=${course.id})}" th:text="${course.title}">Titre</a></td>
                     <td th:text="${course.ECTS}">ECTS</td>
                 </tr>
             </table>
         </div>
-        <div>
-
-        </div>
     </div>
+
+    <h2 class="text-3xl underline grid grid-cols-3 gap-4">
+        <div></div>
+        <div>
+            Ajouter un cours
+        </div>
+    </h2>
+    <form th:action="@{/addCourse}" th:object="${course}" method="post" class="grid grid-cols-3 gap-4">
+        <div></div>
+        <div>
+            <div class="form-group">
+                Sigle du cours : <input type="text" th:field="*{id}" class="form-control" /></div>
+            <span th:errors="*{id}" class="text-danger invalid-feedback">erreur</span>
+            <div class="form-group">
+                Titre du cours : <input type="text" th:field="*{title}" class="form-control" /></div>
+            <span th:errors="*{title}" class="text-danger invalid-feedback">erreur</span>
+            <div class="form-group">
+                ECTS : <input type="text" th:field="*{ECTS}" class="form-control" /></div>
+            <span th:errors="*{ECTS}" class="text-danger invalid-feedback">erreur</span>
+            <button class="btn bg-blue-400" type="submit">Ajouter</button>
+        </div>
+    </form>
 </body>
 
 <footer>
