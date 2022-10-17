@@ -10,13 +10,12 @@ import org.springframework.web.servlet.ModelAndView;
 import lombok.extern.slf4j.Slf4j;
 import webg5.bmi.business.BMIService;
 
-/**
- * BMIRest
+/***
+ * BMIRes
  */
 @RestController
 @Slf4j
 public class BMIRest {
-
     @Autowired
     BMIService bmiService;
 
