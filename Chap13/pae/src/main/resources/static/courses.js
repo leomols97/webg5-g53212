@@ -1,7 +1,7 @@
 var requestData = new Vue({
     el: '#requestData',
     data: {
-        coursesList: [],
+        listCourses: [],
     },
     methods: {
         listCourses: function () {
@@ -16,7 +16,7 @@ var requestData = new Vue({
                 });
         }
     },
-    mounted() {
+    created() {
         this.listCourses()
         console.log("the component is now mounted.");
     }

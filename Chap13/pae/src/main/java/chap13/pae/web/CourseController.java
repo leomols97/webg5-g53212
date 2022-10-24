@@ -32,6 +32,6 @@ public class CourseController {
 
     @GetMapping("/**")
     public String errorPage() {
-        return "erreur";
+        return "error";
     }
 }

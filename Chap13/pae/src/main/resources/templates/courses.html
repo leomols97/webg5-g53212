@@ -12,12 +12,12 @@
     </header>
 
     <div class="grid grid-cols-3 gap-4">
-        <div></div>
+        <h2>Bienvenue dans le site de gestion du programme annuel des etudlants</h2>
         <div id="requestData" v-if="courses.length > 0">
             <br>
-            <li v-for="course in coursesList">
+            <select v-for="course in coursesList">
                 {{ course.title }}
-            </li>
+            </select>
         </div>
         <!-- <div th:if="${!#lists.isEmpty(coursesList)}">
             <table class="table table-bordered">

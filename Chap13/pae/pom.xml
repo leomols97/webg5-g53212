@@ -29,7 +29,7 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
 			<scope>runtime</scope>
-			<optional>true</optional>
+			<!-- <optional>true</optional> -->
 		</dependency>
 		<dependency>
 			<groupId>org.projectlombok</groupId>
@@ -50,20 +50,6 @@
 				jackson-databind
 			</artifactId>
 		</dependency>
-		<dependency>
-			<groupId>
-				org.springframework.boot
-			</groupId>
-			<artifactId>
-				spring-boot-devtools
-			</artifactId>
-			<scope>
-				runtime
-			</scope>
-			<optional>
-				true
-			</optional>
-		</dependency>
 	</dependencies>
 
 	<build>
@@ -73,6 +59,7 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<configuration>
 					<excludes>
+						<!-- <excludeDevtools>false</excludeDevtools> -->
 						<exclude>
 							<groupId>org.projectlombok</groupId>
 							<artifactId>lombok</artifactId>
