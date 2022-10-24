@@ -19,7 +19,7 @@ public class CourseController {
     @Autowired
     Pae pae;
 
-    @GetMapping("/course")
+    @GetMapping("/courses")
     public String getCourses(Model model) {
         // Créer un cours par défaut pour permettre de l'utiliser lors de l'ajout d'un
         // cours dans le formulaire d'ajout dans l'HTML
@@ -30,4 +30,8 @@ public class CourseController {
         return "courses";
     }
 
+    @GetMapping("/**")
+    public String errorPage() {
+        return "erreur";
+    }
 }

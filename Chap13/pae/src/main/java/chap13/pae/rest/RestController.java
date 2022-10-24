@@ -34,6 +34,6 @@ public class RestController {
 
     @GetMapping("/**")
     public String errorPage() {
-        return "erreur";
+        return "erreurzertg";
     }
 }
