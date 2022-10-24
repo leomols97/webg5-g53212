@@ -1,4 +1,4 @@
-package main.java.chap13.pae.dto;
+package chap13.pae.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

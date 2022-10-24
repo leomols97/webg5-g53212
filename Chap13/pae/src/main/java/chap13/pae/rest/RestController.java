@@ -1,4 +1,6 @@
-package chap13.pae.web;
+package chap13.pae.rest;
+
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -9,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import chap13.pae.business.*;
-import chap13.pae.model.*;
+import chap13.pae.dto.*;
 
 @RestControllerAdvice
 @CrossOrigin(origins = "*")
@@ -19,10 +21,16 @@ public class RestController {
     @Autowired
     Pae pae;
 
-    @GetMapping("/courseslist")
-    public ResponseEntity<Iterable<Course>> coursesList() {
+    @GetMapping("/coursesList")
+    public ResponseEntity<Iterable<CourseResponse>> coursesList() {
         return new ResponseEntity<>(pae.getCourses(), HttpStatus.OK);
     }
+
+    // @GetMapping("/courseslist")
+    // public List<Course> course() {
+    // List<Course> coursesList = pae.getCourses();
+    // return coursesList;
+    // }
 
     @GetMapping("/**")
     public String errorPage() {

@@ -1,6 +1,6 @@
 <html>
 
-<head th:replace="~{layout.html::head(titre='Cours')}">
+<head th:replace="~{layout.html::head(titre='Liste des cours')}">
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://cdn.tailwindcss.com"></script>
@@ -13,10 +13,13 @@
 
     <div class="grid grid-cols-3 gap-4">
         <div></div>
-        <div th:if="${#lists.isEmpty(coursesList)}">
-            (Aucun cours)
+        <div id="requestData" v-if="courses.length > 0">
+            <br>
+            <li v-for="course in coursesList">
+                {{ course.title }}
+            </li>
         </div>
-        <div th:if="${!#lists.isEmpty(coursesList)}">
+        <!-- <div th:if="${!#lists.isEmpty(coursesList)}">
             <table class="table table-bordered">
                 <tr>
                     <th>Sigle</th>
@@ -29,30 +32,8 @@
                     <td th:text="${course.ECTS}">ECTS</td>
                 </tr>
             </table>
-        </div>
+        </div> -->
     </div>
-
-    <h2 class="text-3xl underline grid grid-cols-3 gap-4">
-        <div></div>
-        <div>
-            Ajouter un cours
-        </div>
-    </h2>
-    <form th:action="@{/addCourse}" th:object="${course}" method="post" class="grid grid-cols-3 gap-4">
-        <div></div>
-        <div>
-            <div class="form-group">
-                Sigle du cours : <input type="text" th:field="*{id}" class="form-control" /></div>
-            <span th:errors="*{id}" class="text-danger invalid-feedback">erreur</span>
-            <div class="form-group">
-                Titre du cours : <input type="text" th:field="*{title}" class="form-control" /></div>
-            <span th:errors="*{title}" class="text-danger invalid-feedback">erreur</span>
-            <div class="form-group">
-                ECTS : <input type="text" th:field="*{ECTS}" class="form-control" /></div>
-            <span th:errors="*{ECTS}" class="text-danger invalid-feedback">erreur</span>
-            <button class="btn bg-blue-400" type="submit">Ajouter</button>
-        </div>
-    </form>
 </body>
 
 <footer>

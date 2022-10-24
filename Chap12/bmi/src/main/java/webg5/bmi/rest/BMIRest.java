@@ -14,6 +14,7 @@ import webg5.bmi.dto.BMIResponse;
 @RestController
 @RequestMapping("/api/bmi")
 public class BMIRest {
+
     @Autowired
     private BMIService bmiService;
 
