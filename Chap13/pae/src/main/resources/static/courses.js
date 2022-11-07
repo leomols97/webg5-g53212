@@ -1,7 +1,7 @@
 var requestData = new Vue({
     el: '#requestData',
     data: {
-        listCourses: [],
+        listOfCourses: [],
     },
     created() {
         this.listCourses()

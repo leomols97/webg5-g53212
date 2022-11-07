@@ -25,13 +25,6 @@ public class CourseController {
         // cours dans le formulaire d'ajout dans l'HTML
         CourseResponse course = new CourseResponse("", "", 0);
         List<CourseResponse> coursesList = pae.getCourses();
-        // model.addAttribute("coursesList", coursesList);
-        // model.addAttribute("course", course);
         return "courses";
-    }
-
-    @GetMapping("/**")
-    public String errorPage() {
-        return "error";
     }
 }
