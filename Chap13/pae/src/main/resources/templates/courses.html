@@ -1,7 +1,6 @@
 <html>
 
 <head th:replace="~{layout.html::head(titre='Liste des cours')}">
-
 </head>
 
 <body>
@@ -10,28 +9,28 @@
 
     <div class="grid grid-cols-3 gap-4">
         <h2>Bienvenue dans le site de gestion du programme des etudlants</h2>
-        <div id="requestData" v-if="courses.length > 0">
+        <!-- <div id="requestData">
+            ID du cours :
+            <input type="string" v-model="id" /> <br>
+            Titre du cours :
+            <input type="string" v-model="title" /> <br>
+            ECTS :
+            <input type="number" v-model="ECTS" /> <br>
+            <button id="compute" v-on:click="computeBMI">Calculer</button>
             <br>
-            <select v-for="course in this.listCourses">
-                {{ course.title }}
+        </div> -->
 
-            </select>
+        <div id="requestData">
         </div>
 
-        <!-- <div th:if="${!#lists.isEmpty(coursesList)}">
-            <table class="table table-bordered">
-                <tr>
-                    <th>Sigle</th>
-                    <th>Titre</th>
-                    <th>ECTS</th>
-                </tr>
-                <tr th:each="course : ${coursesList}">
-                    <td><a th:href="@{/courses(courseId=${course.id})}" th:text="${course.id}">ID</a></td>
-                    <td><a th:href="@{/courses(courseId=${course.id})}" th:text="${course.title}">Titre</a></td>
-                    <td th:text="${course.ECTS}">ECTS</td>
-                </tr>
-            </table>
-        </div> -->
+        <div id="responseData" v-if="listOfCourses.length > 0">
+            <br>
+            <select>
+                <div v-for="course2 in listOfCourses">
+                    {{ course2.id }}
+                </div>
+            </select>
+        </div>
     </div>
 
     <footer>
