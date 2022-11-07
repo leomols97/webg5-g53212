@@ -25,10 +25,11 @@
 
         <div id="responseData" v-if="listOfCourses.length > 0">
             <br>
+            {{listOfCourses}}
             <select>
-                <div v-for="course2 in listOfCourses">
-                    {{ course2.id }}
-                </div>
+                <option  value="course2.id" v-for="course2 in listOfCourses">
+                    {{ course2 }}
+                </option>
             </select>
         </div>
     </div>

@@ -1,9 +1,9 @@
 var responseData = new Vue({
     el: '#responseData',
     data: {
-        listOfCourses: ["MAT1", "Mathématiques 1", 8],
+        listOfCourses: [],
     },
-    created() {
+    mounted() {
         this.listCourses();
         console.log("the component is now mounted.", this.listOfCourses );
     },
@@ -14,7 +14,7 @@ var responseData = new Vue({
             axios.get(url)
                 .then(function (response) {
                     this.listOfCourses = response.data;
-                    console.log("the component is now mounted.", this.listOfCourses );
+                    console.log("call api.", this.listOfCourses );
                 })
                 .catch(function (error) {
                     alert("Erreur appel REST");
