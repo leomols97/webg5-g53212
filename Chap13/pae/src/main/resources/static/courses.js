@@ -14,7 +14,7 @@ var responseData = new Vue({
             axios.get(url)
                 .then(function (response) {
                     this.listOfCourses = response.data;
-                    console.log("call api.", this.listOfCourses );
+                    console.log("courses", this.listOfCourses );
                 })
                 .catch(function (error) {
                     alert("Erreur appel REST");
