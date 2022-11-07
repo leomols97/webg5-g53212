@@ -3,6 +3,10 @@ var requestData = new Vue({
     data: {
         listCourses: [],
     },
+    created() {
+        this.listCourses()
+        console.log("the component is now mounted.");
+    },
     methods: {
         listCourses: function () {
             url = "/api/coursesList";
@@ -16,10 +20,6 @@ var requestData = new Vue({
                 });
         }
     },
-    created() {
-        this.listCourses()
-        console.log("the component is now mounted.");
-    }
 });
 
 var responseData = new Vue({

@@ -3,7 +3,10 @@
 <head th:replace="~{layout.html::head(titre='Liste des cours')}">
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script type="text/javascript" th:src="@{/courses.js}"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 </head>
 
@@ -12,13 +15,15 @@
     </header>
 
     <div class="grid grid-cols-3 gap-4">
-        <h2>Bienvenue dans le site de gestion du programme annuel des etudlants</h2>
+        <h2>Bienvenue dans le site de gestion du programme des etudlants</h2>
         <div id="requestData" v-if="courses.length > 0">
             <br>
-            <select v-for="course in coursesList">
+            <select v-for="course in this.listCourses">
                 {{ course.title }}
+
             </select>
         </div>
+
         <!-- <div th:if="${!#lists.isEmpty(coursesList)}">
             <table class="table table-bordered">
                 <tr>
