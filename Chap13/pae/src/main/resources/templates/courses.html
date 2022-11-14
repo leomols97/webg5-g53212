@@ -9,31 +9,23 @@
 
     <div class="grid grid-cols-3 gap-4">
         <h2>Bienvenue dans le site de gestion du programme des etudlants</h2>
-        <!-- <div id="requestData">
-            ID du cours :
-            <input type="string" v-model="id" /> <br>
-            Titre du cours :
-            <input type="string" v-model="title" /> <br>
-            ECTS :
-            <input type="number" v-model="ECTS" /> <br>
-            <button id="compute" v-on:click="computeBMI">Calculer</button>
-            <br>
-        </div> -->
 
-        <div id="requestData">
+        <div id="requestData" v-if="listOfCourses.length > 0">
+            <br>
+
+            <select v-on:change="showCourse()" v-model="courseModel">
+                <option :value="course" v-for="course in listOfCourses">
+                    {{ course.title }}
+                </option>
+            </select>
         </div>
 
-        <div id="responseData" v-if="listOfCourses.length > 0">
-            <br>
-            <select>
-                <!-- {{ course.id }} -->
-                <option value="course.id" v-for="course in listOfCourses">
-                    {{ course.id }}
-                </option>
-                <div  value="course.id" v-if="course.id != NULL">
-                    {{ course.id }}
-                </div>
-            </select>
+        <div id="responseData" v-if="course != null">
+            <ul>
+                <li>{{ course.id }}</li>
+                <li>{{ course.title }}</li>
+                <li>{{ course.ects }}</li>
+            </ul>
         </div>
     </div>
 

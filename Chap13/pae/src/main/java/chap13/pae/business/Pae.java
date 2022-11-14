@@ -13,7 +13,7 @@ public class Pae {
     List<CourseResponse> coursesList = new ArrayList<CourseResponse>();
 
     public Pae() {
-        CourseResponse intro = new CourseResponse("INT", "Introduction", 10);
+        CourseResponse intro = new CourseResponse("INT", "Introduction 1", 10);
         CourseResponse math = new CourseResponse("MAT1", "Mathématiques 1", 3);
         CourseResponse dev1 = new CourseResponse("DEV1", "Développement 1", 10);
         coursesList.add(intro);
