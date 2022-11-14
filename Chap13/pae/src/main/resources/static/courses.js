@@ -13,7 +13,7 @@ var responseData = new Vue({
             console.log("Appel Rest");
             axios.get(url)
                 .then(function (response) {
-                    this.listOfCourses = response.data;
+                    responseData.listOfCourses = response.data;
                     console.log("courses", this.listOfCourses );
                 })
                 .catch(function (error) {
