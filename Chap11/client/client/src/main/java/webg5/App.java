@@ -2,7 +2,7 @@ package webg5;
 
 import org.springframework.web.client.RestTemplate;
 import java.util.List;
-import main.java.webg5.Course;
+import webg5.Course;
 
 public class App {
     public static void main(String[] args) {

@@ -1,4 +1,4 @@
-package main.java.webg5;
+package webg5;
 
 public class Course {
     String id;

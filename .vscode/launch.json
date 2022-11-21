@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-PaeApplication<pae>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.example.pae.PaeApplication",
+            "projectName": "pae",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}
