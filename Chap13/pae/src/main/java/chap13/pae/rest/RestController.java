@@ -26,12 +26,6 @@ public class RestController {
         return new ResponseEntity<>(pae.getCourses(), HttpStatus.OK);
     }
 
-    // @GetMapping("/courseslist")
-    // public List<Course> course() {
-    // List<Course> coursesList = pae.getCourses();
-    // return coursesList;
-    // }
-
     @GetMapping("/**")
     public String errorPage() {
         return "error";

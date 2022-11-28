@@ -1,0 +1,22 @@
+<html>
+
+<head th:replace="~{layout.html::head(titre='Erreur')}">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+</head>
+
+<body>
+    <header th:replace="~{layout.html::header}">
+    </header>
+
+    <h2 class="text-3xl underline grid grid-cols-3 gap-4">
+        <div></div>
+        <div>
+            Cette page est affichée car une erreur a eu lieu
+        </div>
+    </h2>
+</body>
+
+</html>
