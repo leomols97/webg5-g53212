@@ -8,7 +8,7 @@
     </header>
 
     <div class="grid grid-cols-3 gap-4">
-        <h2>Bienvenue dans le site de gestion du programme des etudlants</h2>
+        <h3>Cours</h3>
 
         <div id="requestData" v-if="listOfCourses.length > 0">
             <br>
@@ -22,9 +22,9 @@
 
         <div id="responseData">
             <ul>
-                <li>{{ course.id }}</li>
-                <li>{{ course.title }}</li>
-                <li>{{ course.ects }}</li>
+                <li>Id : {{ course.id }}</li>
+                <li>Titre : {{ course.title }}</li>
+                <li>ECTS : {{ course.ects }}</li>
             </ul>
         </div>
     </div>

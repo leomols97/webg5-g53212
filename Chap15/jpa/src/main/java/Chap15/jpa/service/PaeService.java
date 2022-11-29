@@ -7,7 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import Chap15.jpa.DB.dao.CourseDAO;
+import Chap15.jpa.DB.dao.StudentDAO;
 import Chap15.jpa.DB.dto.CourseDTO;
+import Chap15.jpa.DB.dto.StudentDTO;
 
 @Service
 public class PaeService {
@@ -16,6 +18,9 @@ public class PaeService {
 
     @Autowired
     CourseDAO courseDAO;
+
+    @Autowired
+    StudentDAO studentDAO;
 
     public PaeService() {
         // CourseDTO intro = new CourseDTO("INT", "Introduction 1", 10);
@@ -29,6 +34,14 @@ public class PaeService {
     public List<CourseDTO> getCourses() {
         return courseDAO.getAllCourses();
     }
+
+    public List<StudentDTO> getStudents() {
+        return studentDAO.getAllStudents();
+    }
+
+    // public StudentDTO addStudent(StudentDTO student) {
+    // return studentDAO.saveStudent(student);
+    // }
 
     // public void addCourse(CourseDTO course) {
     // coursesList.add(course);

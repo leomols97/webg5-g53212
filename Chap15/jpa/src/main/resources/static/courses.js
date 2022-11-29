@@ -11,7 +11,7 @@ var requestData = new Vue({
     methods: {
         listCourses: function () {
             url = "/api/coursesList";
-            console.log("Appel Rest");
+            console.log("Appel Rest COURSES");
             axios.get(url)
                 .then(function (request) {
                     requestData.listOfCourses = request.data;
@@ -19,7 +19,7 @@ var requestData = new Vue({
                 })
                 .catch(function (error) {
                     console.log(error);
-                    alert("Erreur appel REST");
+                    alert("Erreur appel rest COURSES");
                 });
         },
         showCourse: function () {

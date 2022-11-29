@@ -3,8 +3,9 @@
 
 <head th:fragment="head(titre)">
     <title th:text="${titre}">Layout</title>
-    <script src="http://localhost:8098"></script> <!-- To help for vue-devtools and programming debug -> type vue-devtools in a terminal to make it work -->
-    <meta charset="UTF-8"/>
+    <script src="http://localhost:8098"></script>
+    <!-- To help for vue-devtools and programming debug -> type vue-devtools in a terminal to make it work -->
+    <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
@@ -28,7 +29,9 @@
                 <img th:src="@{/pictures/ESI.jpeg}" alt="ESILogo" class="w-35">
             </div>
         </div>
-        <div><a th:href="@{/courses}">Cours</a></div>
+        <div><a th:href="@{/courses}">Cours</a>
+            <a th:href="@{/students}">Etudiants</a>
+        </div>
     </header>
     <main layout:fragment="main">
         Ce contenu sera remplacé par le vrai.

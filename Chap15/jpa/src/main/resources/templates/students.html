@@ -1,0 +1,81 @@
+<html>
+
+<head th:replace="~{layout.html::head(titre='Liste des étudiants')}">
+</head>
+
+<body>
+    <header th:replace="~{layout.html::header}">
+    </header>
+
+    <div class="grid grid-cols-3 gap-4">
+        <h3>Etudiants</h3>
+
+        <div id="requestData">
+
+            <table class="table" v-if="listOfStudents.length > 0">
+                <tr>
+                    <th scope="col">Matricule</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Genre</th>
+                    <th scope="col">Section</th>
+                </tr>
+                <tr :value="student" v-for="student in listOfStudents">
+                    <td scope="row">{{ student.matricule }}</td>
+                    <td>{{ student.name }}</td>
+                    <td>{{ student.genre }}</td>
+                    <td>{{ student.section }}</td>
+                </tr>
+            </table>
+
+            <div>
+                <form @submit.prevent="submitForm" v-if="!formSubmitted">
+                    <div class="form-group">
+                        <span>Matricule</span><br>
+                        <input v-model="matricule" type="number" placeholder="Matricule" class="form-control" /><br>
+                        <span>Nom</span><br>
+                        <input v-model="name" type="text" placeholder="Nom" class="form-control" /><br>
+                    </div>
+
+                    <div class="form-group">
+                        <span>Genre</span><br>
+                        <input type="radio" v-model="genre" value="M" id="M" name="genre" />
+                        <label>Homme</label>
+                        <input type="radio" v-model="genre" value="F" id="F" name="genre" />
+                        <label>Femme</label><br>
+                    </div>
+
+                    <div class="form-group">
+                        <span>Section</span><br>
+                        <input type="radio" v-model="section" value="GESTION" id="GESTION" name="section" />
+                        <label>Gestion</label>
+                        <input type="radio" v-model="section" value="INDUSTRIEL" id="INDUSTRIEL" name="section" />
+                        <label>Industriel</label>
+                        <input type="radio" v-model="section" value="RESEAUX" id="RESEAUX" name="section" />
+                        <label>Réseaux</label><br>
+                    </div>
+
+                    <button class="btn btn-primary" type="submit">Ajouter</button>
+                </form>
+
+                <div v-if="formSubmitted">
+                    <h3>Etudiant ajouté avec ces informations : </h3>
+                    <p>Matricule: {{ matricule }}</p>
+                    <p>Nom: {{ name }}</p>
+                    <p>Genre: {{ gender }}</p>
+                    <p>Section: {{ section }}</p>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <footer>
+
+    </footer>
+
+    <script type="text/javascript" th:src="@{/students.js}"></script>
+
+</body>
+
+
+</html>

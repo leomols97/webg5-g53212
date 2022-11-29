@@ -10,7 +10,7 @@ import javax.persistence.EntityManager;
 import java.util.List;
 
 @Repository
-public class CourseDAO implements CourseInterface {
+public class CourseDAO {
 
     private EntityManager entityManager;
 
@@ -21,7 +21,7 @@ public class CourseDAO implements CourseInterface {
     }
 
     // get all the courses from the database
-    @Override
+    // @Override
     public List<CourseDTO> getAllCourses() {
         Query query = (Query) entityManager.createQuery("from CourseDTO");
         List<CourseDTO> courses = query.getResultList();
@@ -30,22 +30,22 @@ public class CourseDAO implements CourseInterface {
     }
 
     // return the course by giving id as input
-    @Override
+    // @Override
     public CourseDTO findCourseById(int courseId) {
         CourseDTO course = entityManager.find(CourseDTO.class, courseId);
         return course;
     }
 
     // add the course to the database
-    @Override
+    // @Override
     public CourseDTO saveCourse(CourseDTO course) {
         CourseDTO dbCourse = entityManager.merge(course);
         course.setId(dbCourse.getId());
         return course;
     }
 
-    // delete the course from the database using transaction id
-    @Override
+    // delete the course from the database using course id
+    // @Override
     public void deleteCourseById(int courseId) {
         Query query = (Query) entityManager.createQuery("delete from CourseDTO where id=:courseId");
         query.setParameter("courseId", courseId);
