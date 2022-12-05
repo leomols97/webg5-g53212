@@ -2,6 +2,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Launch ScrumApplication",
+            "request": "launch",
+            "mainClass": "be.he2b.scrum.ScrumApplication",
+            "projectName": "scrum"
+        },
+        {
+            "type": "java",
             "name": "Spring Boot-PaeApplication<pae>",
             "request": "launch",
             "cwd": "${workspaceFolder}",

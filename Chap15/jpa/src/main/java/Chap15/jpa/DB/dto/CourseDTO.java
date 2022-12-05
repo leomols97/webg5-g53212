@@ -13,8 +13,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @Getter
 @Setter
-public class CourseDTO {
-
+public class Course {
     @Id
     private String id;
     private String title;

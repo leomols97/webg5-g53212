@@ -1,4 +1,5 @@
 {
     "java.configuration.updateBuildConfiguration": "interactive",
-    "liveServer.settings.multiRootWorkspaceName": "WEBG5"
+    "liveServer.settings.multiRootWorkspaceName": "WEBG5",
+    "java.compile.nullAnalysis.mode": "automatic"
 }
