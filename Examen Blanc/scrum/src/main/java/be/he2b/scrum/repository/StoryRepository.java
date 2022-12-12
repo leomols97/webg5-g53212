@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
 import be.he2b.scrum.DTOS.ProjectDTO;
+import be.he2b.scrum.model.Project;
 import be.he2b.scrum.model.Story;
 
 public interface StoryRepository extends CrudRepository<Story, Integer> {
@@ -22,8 +23,15 @@ public interface StoryRepository extends CrudRepository<Story, Integer> {
             + " COUNT ( DISTINCT story.id ) ) " // Nombre de stories
 
             + " FROM Story story "
-            + " RIGHT JOIN Sprint sprint ON story.sprint.id = sprint.id "
-            + " RIGHT JOIN Project project ON sprint.project.id = project.id "
+            + " RIGHT JOIN Sprint sprint ON story.sprint.id = sprint.id " // RIGHT JOIN nécessaire pour faire en sorte
+                                                                          // que TOUS les projets soient
+                                                                          // retournés, même ceux qui n'ont pas de
+                                                                          // stories et non pas uniquement le premier
+            + " RIGHT JOIN Project project ON sprint.project.id = project.id " // RIGHT JOIN nécessaire pour faire en
+                                                                               // sorte que TOUS les projets soient
+                                                                               // retournés, même ceux qui n'ont pas de
+                                                                               // stories et non pas uniquement le
+                                                                               // premier
 
             + " WHERE story.sprint.project.name LIKE :projectNamePrefix% "
 
