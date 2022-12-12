@@ -4,9 +4,9 @@ import java.util.Collection;
 
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.query.Param;
 
 import be.he2b.scrum.DTOS.ProjectDTO;
-import be.he2b.scrum.model.Project;
 import be.he2b.scrum.model.Story;
 
 public interface StoryRepository extends CrudRepository<Story, Integer> {
@@ -36,5 +36,5 @@ public interface StoryRepository extends CrudRepository<Story, Integer> {
             + " WHERE story.sprint.project.name LIKE :projectNamePrefix% "
 
             + " GROUP BY story.sprint.project.name")
-    Collection<ProjectDTO> findProjectWithNameBegin(String projectNamePrefix);
+    Collection<ProjectDTO> findProjectWithNameBegin(@Param("projectNamePrefix") String projectNamePrefix);
 }

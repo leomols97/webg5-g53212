@@ -15,7 +15,9 @@
                     <td>Nombre de sprints</td>
                     <td>Statut du projet</td>
                     <tr th:each="project : ${projects}">
-                        <td th:text="${project.name}">Nom du projet</td>
+                        <td><a th:href="@{'/projects/project/' + ${project.name}}" th:text="${project.name}">Nom du
+                                projet</a>
+                        </td>
                         <td th:text="${project.sprints.size}">Nombre de sprints</td>
                         <td th:text="${project.active} ? 'En cours' : 'Terminé'">Statut du projet</td>
                     </tr>
