@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import be.he2b.scrum.DTOS.ProjectDTO;
 import be.he2b.scrum.model.Project;
+import be.he2b.scrum.model.Story;
 import be.he2b.scrum.repository.ProjectRepository;
 import be.he2b.scrum.repository.StoryRepository;
 
@@ -23,7 +24,15 @@ public class ScrumService {
         return storyRepository.findProjectWithNameBegin(projectNamePrefix);
     }
 
+    public Collection<Story> findBySprintProjectName(String projectName) {
+        return storyRepository.findBySprintProjectName(projectName);
+    }
+
     public Collection<Project> getAllProjects() {
         return projectRepository.findAll();
+    }
+
+    public void saveOrUpdate(Story story) {
+        storyRepository.save(story);
     }
 }

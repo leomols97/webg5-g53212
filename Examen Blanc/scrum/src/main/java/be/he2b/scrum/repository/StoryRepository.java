@@ -11,10 +11,10 @@ import be.he2b.scrum.model.Story;
 
 public interface StoryRepository extends CrudRepository<Story, Integer> {
 
-    public Collection<Story> findBySprintProjectName(String name); // car, avec collection, il est possible d'utiliser
-                                                                   // les fonctions set(), get(), at(),... ce à quoi
-                                                                   // nous n'aurions pas accès si nous retournions
-                                                                   // Iterable<Story>
+    public Collection<Story> findBySprintProjectName(String projectName); // car, avec collection, il est possible
+                                                                          // d'utiliser les fonctions set(), get(),
+                                                                          // at(),... ce à quoi nous n'aurions pas accès
+                                                                          // si nous retournions Iterable<Story>
 
     @Query("SELECT new be.he2b.scrum.DTOS.ProjectDTO( " // car il faut retourner un objet de type ProjectDTO et non de
                                                         // type Object()
@@ -37,4 +37,5 @@ public interface StoryRepository extends CrudRepository<Story, Integer> {
 
             + " GROUP BY story.sprint.project.name")
     Collection<ProjectDTO> findProjectWithNameBegin(@Param("projectNamePrefix") String projectNamePrefix);
+
 }

@@ -13,7 +13,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @Getter
 @Setter
-public class Course {
+public class CourseDTO {
     @Id
     private String id;
     private String title;

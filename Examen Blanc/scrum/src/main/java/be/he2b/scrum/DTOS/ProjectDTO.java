@@ -16,6 +16,6 @@ import lombok.Setter;
  */
 public class ProjectDTO {
     private String projectName;
-    public long sprintQantity;
+    private long sprintQantity;
     private long storyQantity;
 }

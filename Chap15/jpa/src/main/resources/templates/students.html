@@ -28,7 +28,7 @@
             </table>
 
             <div>
-                <form @submit.prevent="submitForm" v-if="!formSubmitted">
+                <!-- <form @submit.prevent="submitForm" v-if="!formSubmitted">
                     <div class="form-group">
                         <span>Matricule</span><br>
                         <input v-model="matricule" type="number" placeholder="Matricule" class="form-control" /><br>
@@ -55,17 +55,41 @@
                     </div>
 
                     <button class="btn btn-primary" type="submit">Ajouter</button>
-                </form>
+                </form> -->
 
-                <div v-if="formSubmitted">
+                <!-- <div v-if="formSubmitted">
                     <h3>Etudiant ajouté avec ces informations : </h3>
                     <p>Matricule: {{ matricule }}</p>
                     <p>Nom: {{ name }}</p>
                     <p>Genre: {{ gender }}</p>
                     <p>Section: {{ section }}</p>
-                </div>
+                </div> -->
 
             </div>
+
+            <form method="post" action="/addStudent">
+                <label for="matricule">Matricule :</label><br>
+                <input type="text" id="matricule" name="matricule" class="form-control"><br>
+                <label for="name">Nom :</label><br>
+                <input type="text" id="name" name="name" class="form-control"><br>
+                <label for="genre">Genre :</label><br>
+                <div class="form-group">
+                    <input type="radio" v-model="genre" value="M" id="M" name="genre" />
+                    <label>Homme</label>
+                    <input type="radio" v-model="genre" value="F" id="F" name="genre" />
+                    <label>Femme</label><br>
+                </div>
+                <label for="section">Section :</label><br>
+                <div class="form-group" id="section">
+                    <input type="radio" v-model="section" value="GESTION" id="GESTION" name="section" />
+                    <label>Gestion</label>
+                    <input type="radio" v-model="section" value="INDUSTRIEL" id="INDUSTRIEL" name="section" />
+                    <label>Industriel</label>
+                    <input type="radio" v-model="section" value="RESEAUX" id="RESEAUX" name="section" />
+                    <label>Réseaux</label><br>
+                </div>
+                <button class="btn btn-primary" type="submit">Ajouter</button>
+            </form>
         </div>
     </div>
 

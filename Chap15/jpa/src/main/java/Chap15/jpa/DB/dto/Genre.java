@@ -1,6 +1,6 @@
 package Chap15.jpa.DB.dto;
 
-enum Genre {
+public enum Genre {
     M,
     F
 }

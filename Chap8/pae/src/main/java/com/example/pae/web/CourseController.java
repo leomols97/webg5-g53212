@@ -35,7 +35,7 @@ public class CourseController {
     @PostMapping("/addCourse")
     public String addCourse(@Valid @ModelAttribute("course") Course course, Errors errors, Model model) {
         if (errors.hasErrors()) {
-            // Les 2 lignes suivantes sont pcq il faut redonner la lsite des cours au modèle
+            // Les 2 lignes suivantes sont pcq il faut redonner la liste des cours au modèle
             // car on recharge la page
             List<Course> coursesList = pae.getCourses();
             model.addAttribute("coursesList", coursesList);
