@@ -1,5 +1,7 @@
 package Chap15.jpa.web;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -48,10 +50,10 @@ public class StudentController {
     }
 
     @PostMapping("/addStudent")
-    public String addStudent(@RequestParam("matricule") String matricule,
-            @RequestParam("name") String name,
-            @RequestParam("genre") Genre genre,
-            @RequestParam("section") Section section,
+    public String addStudent(@Valid @RequestParam("matricule") String matricule,
+            @Valid @RequestParam("name") String name,
+            @Valid @RequestParam("genre") Genre genre,
+            @Valid @RequestParam("section") Section section,
             /* @ModelAttribute StudentDTO student, */ Model model) {
         System.out.println("matricule");
         System.out.println(matricule);
@@ -75,12 +77,5 @@ public class StudentController {
         StudentDTO student = new StudentDTO(mat, name, genr, sect);
         studentRepository.save(student);
         return "redirect:/students";
-    }
-
-    public void removeStudent(@RequestParam("matricule") String matricule) {
-        int mat = convertStringToInt(matricule);
-        if (mat != -1) {
-            studentRepository.deleteById(mat);
-        }
     }
 }
