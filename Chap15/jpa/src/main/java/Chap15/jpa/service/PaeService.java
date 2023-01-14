@@ -19,31 +19,10 @@ public class PaeService {
     @Autowired
     CourseDAO courseDAO;
 
-    @Autowired
-    StudentDAO studentDAO;
-
     public PaeService() {
-        // CourseDTO intro = new CourseDTO("INT", "Introduction 1", 10);
-        // CourseDTO math = new CourseDTO("MAT1", "Mathématiques 1", 3);
-        // CourseDTO dev1 = new CourseDTO("DEV1", "Développement 1", 10);
-        // coursesList.add(intro);
-        // coursesList.add(math);
-        // coursesList.add(dev1);
     }
 
     public List<CourseDTO> getCourses() {
         return courseDAO.getAllCourses();
     }
-
-    public List<StudentDTO> getStudents() {
-        return studentDAO.getAllStudents();
-    }
-
-    // public StudentDTO addStudent(StudentDTO student) {
-    // return studentDAO.saveStudent(student);
-    // }
-
-    // public void addCourse(CourseDTO course) {
-    // coursesList.add(course);
-    // }
 }

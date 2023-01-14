@@ -3,9 +3,17 @@ package Chap15.jpa.DB.dto;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.Range;
+import org.springframework.format.annotation.NumberFormat;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
@@ -21,8 +29,10 @@ import lombok.Setter;
 public class StudentDTO {
 
     // @GeneratedValue(strategy = GenerationType.IDENTITY) // mis en commentaire
-    // car, sinon, on ne peut pas créer un étudiant avec un matricule donné
-    // @Range(min = 0, max = 90)
+    // car, sinon, on ne peut pas créer un
+    // étudiant avec un matricule donné
+    @Range(min = 10000, max = 99999)
+    @Size(min = 4, max = 5, message = "Le matricule doit être composé de 5 chiffres")
     // @Pattern(regexp = "^\\d{5}$")
     // @NumberFormat(style = NumberFormat.Style.NUMBER)
     @Id
