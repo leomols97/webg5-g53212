@@ -67,27 +67,54 @@
 
             </div>
 
-            <form method="post" action="/addStudent">
+            <form method="post" th:action="@{/students/add}" th:object="${student}">
                 <label for="matricule">Matricule :</label><br>
-                <input type="text" id="matricule" name="matricule" class="form-control"><br>
+                <input type="text" th:field="*{matricule}" id="matricule" class="form-control"><br>
+                <div th:if="${#fields.hasErrors('matricule')}" th:errors="*{matricule}"></div>
+
                 <label for="name">Nom :</label><br>
-                <input type="text" id="name" name="name" class="form-control"><br>
-                <label for="genre">Genre :</label><br>
+                <input type="text" th:field="*{name}" id="name" class="form-control"><br>
+                <div th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
+
                 <div class="form-group">
-                    <input type="radio" v-model="genre" value="M" id="M" name="genre" />
-                    <label>Homme</label>
-                    <input type="radio" v-model="genre" value="F" id="F" name="genre" />
-                    <label>Femme</label><br>
+                    <label for="genre">Genre</label>
+                    <div class="form-check">
+                        <input type="radio" class="form-check-input" th:field="*{genre}" th:value="'M'" id="M">
+                        <label class="form-check-label" for="M">Male</label>
+                    </div>
+                    <div class="form-check">
+                        <input type="radio" class="form-check-input" th:field="*{genre}" th:value="'F'" id="F">
+                        <label class="form-check-label" for="F">Female</label>
+                    </div>
+                    <div th:if="${student.genre == 'M'}" class="text-info">
+                        <p>Vous avez sélectionné 'Homme'</p>
+                    </div>
+                    <div th:if="${student.genre == 'F'}" class="text-info">
+                        <p>Vous avez sélectionné 'Femme'</p>
+                    </div>
                 </div>
-                <label for="section">Section :</label><br>
-                <div class="form-group" id="section">
-                    <input type="radio" v-model="section" value="GESTION" id="GESTION" name="section" />
-                    <label>Gestion</label>
-                    <input type="radio" v-model="section" value="INDUSTRIEL" id="INDUSTRIEL" name="section" />
-                    <label>Industriel</label>
-                    <input type="radio" v-model="section" value="RESEAUX" id="RESEAUX" name="section" />
-                    <label>Réseaux</label><br>
+                <div th:if="${#fields.hasErrors('genre')}" th:errors="*{genre}"></div>
+
+                <div class="form-group">
+                    <label for="section">Section</label>
+                    <div class="form-check">
+                        <input type="radio" class="form-check-input" th:field="*{section}" th:value="'GESTION'"
+                            id="GESTION">
+                        <label class="form-check-label" for="GESTION">Gestion</label>
+                    </div>
+                    <div class="form-check">
+                        <input type="radio" class="form-check-input" th:field="*{section}" th:value="'RESEAUX'"
+                            id="RESEAUX">
+                        <label class="form-check-label" for="RESEAUX">Réseaux</label>
+                    </div>
+                    <div class="form-check">
+                        <input type="radio" class="form-check-input" th:field="*{section}" th:value="'INDUSTRIEL'"
+                            id="INDUSTRIEL">
+                        <label class="form-check-label" for="INDUSTRIEL">Industriel</label>
+                    </div>
                 </div>
+                <div th:if="${#fields.hasErrors('section')}" th:errors="*{section}"></div>
+
                 <button class="btn btn-primary" type="submit">Ajouter</button>
             </form>
         </div>
