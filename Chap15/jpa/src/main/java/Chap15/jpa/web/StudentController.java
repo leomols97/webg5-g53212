@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import Chap15.jpa.DB.dto.StudentDTO;
+import Chap15.jpa.DB.dto.Student;
 import Chap15.jpa.DB.dto.Genre;
 import Chap15.jpa.DB.dto.Section;
 import Chap15.jpa.Repositories.StudentRepository;
@@ -34,7 +34,7 @@ public class StudentController {
 
     @GetMapping("/")
     public String home(Model model) {
-        model.addAttribute("student", new StudentDTO());
+        model.addAttribute("student", new Student());
         return "students";
     }
 
@@ -42,7 +42,7 @@ public class StudentController {
     public String getStudents(Model model) {
         // Créer un cours par défaut pour permettre de l'utiliser lors de l'ajout d'un
         // cours dans le formulaire d'ajout dans l'HTML
-        model.addAttribute("student", new StudentDTO());
+        model.addAttribute("student", new Student());
         return "students";
     }
 
@@ -52,11 +52,11 @@ public class StudentController {
             // @Valid @RequestParam("name") String name,
             // @Valid @RequestParam("genre") Genre genre,
             // @Valid @RequestParam("section") Section section,
-            @Valid @ModelAttribute(name = "student") StudentDTO student, Errors errors, Model model) {
+            @Valid @ModelAttribute(name = "student") Student student, Errors errors, Model model) {
         if (errors.hasErrors()) {
             // Les 2 lignes suivantes sont pcq il faut redonner la liste des cours au modèle
             // car on recharge la page
-            List<StudentDTO> studentsList = studentService.getStudents();
+            List<Student> studentsList = studentService.getStudents();
             model.addAttribute("listOfStudents", studentsList);
             return "students";
         } else {

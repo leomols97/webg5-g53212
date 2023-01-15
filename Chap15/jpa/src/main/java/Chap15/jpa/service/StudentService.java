@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import Chap15.jpa.DB.dao.StudentDAO;
-import Chap15.jpa.DB.dto.StudentDTO;
+import Chap15.jpa.DB.dto.Student;
 
 @Service
 public class StudentService {
@@ -17,11 +17,11 @@ public class StudentService {
     public StudentService() {
     }
 
-    public List<StudentDTO> getStudents() {
+    public List<Student> getStudents() {
         return studentDAO.getAllStudents();
     }
 
-    public StudentDTO addStudent(StudentDTO student) {
+    public Student addStudent(Student student) {
         return studentDAO.saveStudent(student);
     }
 }

@@ -27,12 +27,12 @@ public class RestController {
     StudentDAO studentDAO;
 
     @GetMapping("/coursesList")
-    public ResponseEntity<Iterable<CourseDTO>> coursesList() {
+    public ResponseEntity<Iterable<Course>> coursesList() {
         return new ResponseEntity<>(courseDAO.getAllCourses(), HttpStatus.OK);
     }
 
     @GetMapping("/studentsList")
-    public ResponseEntity<Iterable<StudentDTO>> studentsList() {
+    public ResponseEntity<Iterable<Student>> studentsList() {
         return new ResponseEntity<>(studentDAO.getAllStudents(), HttpStatus.OK);
     }
 

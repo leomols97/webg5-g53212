@@ -19,6 +19,5 @@ public class UserDTO {
 
     @Id
     private String login;
-
     private String name;
 }

@@ -2,15 +2,15 @@ package Chap15.jpa.DB.dao;
 
 import java.util.List;
 
-import Chap15.jpa.DB.dto.StudentDTO;
+import Chap15.jpa.DB.dto.Student;
 
 public interface StudentInterface {
 
-    List<StudentDTO> getAllStudents();
+    List<Student> getAllStudents();
 
-    StudentDTO findStudentByMatricule(int StudentMatricule);
+    Student findStudentByMatricule(int StudentMatricule);
 
-    StudentDTO saveStudent(StudentDTO Student);
+    Student saveStudent(Student Student);
 
     void deleteStudentByMatricule(int StudentMatricule);
 }

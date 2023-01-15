@@ -4,7 +4,7 @@ import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import Chap15.jpa.DB.dto.CourseDTO;
+import Chap15.jpa.DB.dto.Course;
 
 import javax.persistence.EntityManager;
 import java.util.List;
@@ -22,24 +22,24 @@ public class CourseDAO {
 
     // get all the courses from the database
     // @Override
-    public List<CourseDTO> getAllCourses() {
+    public List<Course> getAllCourses() {
         Query query = (Query) entityManager.createQuery("from CourseDTO");
-        List<CourseDTO> courses = query.getResultList();
+        List<Course> courses = query.getResultList();
 
         return courses;
     }
 
     // return the course by giving id as input
     // @Override
-    public CourseDTO findCourseById(int courseId) {
-        CourseDTO course = entityManager.find(CourseDTO.class, courseId);
+    public Course findCourseById(int courseId) {
+        Course course = entityManager.find(Course.class, courseId);
         return course;
     }
 
     // add the course to the database
     // @Override
-    public CourseDTO saveCourse(CourseDTO course) {
-        CourseDTO dbCourse = entityManager.merge(course);
+    public Course saveCourse(Course course) {
+        Course dbCourse = entityManager.merge(course);
         course.setId(dbCourse.getId());
         return course;
     }

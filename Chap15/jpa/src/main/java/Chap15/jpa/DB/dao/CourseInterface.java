@@ -2,15 +2,15 @@ package Chap15.jpa.DB.dao;
 
 import java.util.List;
 
-import Chap15.jpa.DB.dto.CourseDTO;
+import Chap15.jpa.DB.dto.Course;
 
 public interface CourseInterface {
 
-    List<CourseDTO> getAllCourses();
+    List<Course> getAllCourses();
 
-    CourseDTO findCourseById(int courseId);
+    Course findCourseById(int courseId);
 
-    CourseDTO saveCourse(CourseDTO course);
+    Course saveCourse(Course course);
 
     void deleteCourseById(int courseId);
 }
