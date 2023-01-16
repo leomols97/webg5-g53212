@@ -7,8 +7,11 @@
     <header th:replace="~{layout.html::header}">
     </header>
 
+    <h1>Etudiants</h1>
+
     <div class="grid grid-cols-3 gap-4">
-        <h3>Etudiants</h3>
+
+        <div></div>
 
         <div id="requestData">
 
@@ -21,7 +24,8 @@
                 </tr>
                 <tr :value="student" v-for="student in listOfStudents">
                     <td scope="row">{{ student.matricule }}</td>
-                    <td>{{ student.name }}</td>
+                    <td><a th:href="@{/students/{matricule}(matricule=${student.matricule})}">{{ student.name }}</a>
+                    </td>
                     <td>{{ student.genre }}</td>
                     <td>{{ student.section }}</td>
                 </tr>

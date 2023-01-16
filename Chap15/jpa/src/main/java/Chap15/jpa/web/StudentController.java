@@ -1,33 +1,38 @@
 package Chap15.jpa.web;
 
+import java.beans.PropertyEditorSupport;
 import java.util.List;
+import java.util.Optional;
 
-import javax.validation.ConstraintViolationException;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
-
 import Chap15.jpa.DB.dto.Student;
-import Chap15.jpa.DB.dto.Genre;
-import Chap15.jpa.DB.dto.Section;
+import Chap15.jpa.Repositories.CourseRepository;
 import Chap15.jpa.Repositories.StudentRepository;
-import Chap15.jpa.service.PaeService;
+import Chap15.jpa.service.CourseService;
 import Chap15.jpa.service.StudentService;
 
 @Controller
 public class StudentController {
 
     @Autowired
+    CourseService courseService;
+
+    @Autowired
     StudentService studentService;
+
+    @Autowired
+    CourseRepository courseRepository;
 
     @Autowired
     StudentRepository studentRepository;
@@ -47,12 +52,7 @@ public class StudentController {
     }
 
     @PostMapping("/students/add")
-    public String addStudent(
-            // @Valid @RequestParam("matricule") String matricule,
-            // @Valid @RequestParam("name") String name,
-            // @Valid @RequestParam("genre") Genre genre,
-            // @Valid @RequestParam("section") Section section,
-            @Valid @ModelAttribute(name = "student") Student student, Errors errors, Model model) {
+    public String addStudent(@Valid @ModelAttribute(name = "student") Student student, Errors errors, Model model) {
         if (errors.hasErrors()) {
             // Les 2 lignes suivantes sont pcq il faut redonner la liste des cours au modèle
             // car on recharge la page
@@ -60,10 +60,21 @@ public class StudentController {
             model.addAttribute("listOfStudents", studentsList);
             return "students";
         } else {
-            System.out.print("ERTHZERTHM");
-
             studentRepository.save(student);
         }
         return "redirect:/students";
+    }
+
+    @GetMapping("/students/{matricule}")
+    public String getCourseDetails(@PathVariable String matricule, Model model) {
+        Optional<Student> student = studentRepository.findById(matricule);
+        List<Student> coursesForThisStudent = courseRepository.findByStudent(matricule);
+        if (student.isPresent()) {
+            model.addAttribute("course", student.orElse(null)); // orElse(null) au cas où le cours n'existe pas
+            model.addAttribute("coursesForThisStudent", coursesForThisStudent);
+        } else {
+            return "erreur";
+        }
+        return "course";
     }
 }

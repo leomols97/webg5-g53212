@@ -7,9 +7,27 @@
     <header th:replace="~{layout.html::header}">
     </header>
 
-    <div class="grid grid-cols-3 gap-4">
-        <h3>Cours</h3>
+    <h1>Cours</h1>
 
+    <div class="grid grid-cols-3 gap-20">
+
+        <div></div>
+        <div>
+            <table class="table">
+                <tr>
+                    <th>Sigle</th>
+                    <th>Titre</th>
+                    <th>ECTS</th>
+                </tr>
+                <tr th:each="course : ${coursesList}">
+                    <td th:text="${course.id}"></td>
+                    <td><a th:href="@{/courses/{id}(id=${course.id})}" th:text="${course.title}"></a></td>
+                    <td th:text="${course.ECTS}"></td>
+                </tr>
+            </table>
+        </div>
+
+        <div></div>
         <div id="requestData" v-if="listOfCourses.length > 0">
             <br>
 
@@ -18,6 +36,19 @@
                     {{ course.title }}
                 </option>
             </select>
+
+            <!-- <table class="table" v-if="listOfCourses.length > 0">
+                <tr>
+                    <th scope="col">Sigle</th>
+                    <th scope="col">Titre</th>
+                    <th scope="col">ECTS</th>
+                </tr>
+                <tr :value="course" v-for="course in listOfCourses">
+                    <td scope="row">{{ course.id }}</td>
+                    <td>{{ course.title }}</td>
+                    <td>{{ course.ects }}</td>
+                </tr>
+            </table> -->
         </div>
 
         <div id="responseData">
@@ -27,6 +58,31 @@
                 <li>ECTS : {{ course.ects }}</li>
             </ul>
         </div>
+
+        <div></div>
+        <div></div>
+        <form method="post" th:action="@{/courses/add}" th:object="${course}">
+            <div>
+                <label for="id">Sigle :</label><br>
+                <input type="text" th:field="*{id}" id="id" class="form-control"><br>
+                <!-- <input type="text" th:field="*{id}" th:errorclass="errorField" /> -->
+                <span th:errors="*{id}" class="errorMsg">erreur</span>
+            </div>
+            <div>
+                <label for="name">Title :</label><br>
+                <input type="text" th:field="*{title}" id="title" class="form-control"><br>
+                <!-- <input type="text" th:field="*{title}" th:errorclass="errorField" /> -->
+                <span th:errors="*{title}" class="errorMsg">erreur</span>
+            </div>
+            <div>
+                <label for="name">ECTS :</label><br>
+                <input type="text" th:field="*{ECTS}" id="ects" class="form-control"><br>
+                <!-- <input type="text" th:field="*{ECTS}" th:errorclass="errorField" /> -->
+                <span th:errors="*{ECTS}" class="errorMsg">erreur</span>
+            </div>
+
+            <button class="btn btn-primary" type="submit">Ajouter</button>
+        </form>
     </div>
 
     <footer>

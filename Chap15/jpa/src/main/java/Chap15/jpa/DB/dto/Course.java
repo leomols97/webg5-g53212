@@ -2,7 +2,15 @@ package Chap15.jpa.DB.dto;
 
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+
+import org.hibernate.validator.constraints.Range;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 
 import lombok.AllArgsConstructor;
@@ -15,16 +23,18 @@ import lombok.Setter;
 @AllArgsConstructor
 @Getter
 @Setter
-/**
- * Cette classe a pour simple but de montrer un exemple d'utilisation d'une
- * relation 1-N BIDIRECTIONNELLE avec Student
- */
 public class Course {
+
     @Id
     private String id;
     private String title;
-    private int ECTS;
-    @ManyToOne
-    @JoinColumn(name = "student_id")
-    private Student student;
+    @Range(min = 1, max = 10, message = "Le matricule doit être un nombre compris entre 1 et 10 compris !")
+    private String ECTS;
+
+    // @ManyToMany(mappedBy = "course", cascade = CascadeType.ALL)
+    // // @JoinColumn(name = "students")
+    // private List<Student> students;
+
+    @ManyToMany(mappedBy = "courses", cascade = CascadeType.ALL)
+    private List<Student> students = new ArrayList<>();
 }

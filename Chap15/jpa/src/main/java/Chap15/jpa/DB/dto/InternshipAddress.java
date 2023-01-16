@@ -2,7 +2,11 @@ package Chap15.jpa.DB.dto;
 
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+
+import org.hibernate.validator.constraints.Range;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -21,12 +25,12 @@ import lombok.Setter;
  * Cette classe a pour simple but de montrer un exemple d'utilisation d'une
  * relation 1-1 BIDIRECTIONNELLE avec Student
  */
-public class InternshipAddress {
+public class Internshipaddress {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private String name;
     private String street;
+    private int number;
     private String city;
     private String post_code;
 
