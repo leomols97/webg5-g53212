@@ -68,4 +68,8 @@ public class StudentDAO {
 
         studentRepository.deleteById(studentMatricule);
     }
+
+    public List<Student> findByNameContainingIgnoreCase(String name) {
+        return studentRepository.findByNameContainingIgnoreCase(name);
+    }
 }

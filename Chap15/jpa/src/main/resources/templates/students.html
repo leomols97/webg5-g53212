@@ -101,6 +101,62 @@
                 </div>
                 <button class="btn btn-primary" type="submit">Ajouter</button>
             </form>
+
+            <template>
+                <div>
+                    <div>
+                        <label for="search-input">Rechercher un étudiant :</label>
+                        <input type="text" id="search-input" v-model="searchTerm" @input="filterStudents" />
+                    </div>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Matricule</th>
+                                <th>Nom</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr v-for="student in filteredStudents" :key="student.matricule">
+                                <td>{{ student.matricule }}</td>
+                                <td>{{ student.name }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </template>
+
+            <script>
+                export default {
+                    data() {
+                        return {
+                            listOfStudents: [],
+                            filterKey: '',
+                            students: [], // La liste des étudiants à afficher
+                        }
+                    },
+                    computed: {
+                        filteredStudents() {
+                            return requestData.listOfStudents = request.data;
+                            // return this.students.filter(student => student.name.toLowerCase().includes(this.filterKey.toLowerCase()))
+                        }
+                    },
+                    methods: {
+                        filterStudents() {
+                            // Votre logique de filtrage ici
+                        }
+                    },
+                    created() {
+                        axios.get('/api/studentsList')
+                            .then(response => {
+                                this.etudiants = response.data;
+                            })
+                            .catch(error => {
+                                console.log(error);
+                            });
+                    }
+                }
+            </script>
+
         </div>
     </div>
 

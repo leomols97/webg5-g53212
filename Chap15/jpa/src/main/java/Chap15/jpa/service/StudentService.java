@@ -36,4 +36,8 @@ public class StudentService {
     public void addStudentToCourse(String matricule, String courseId) {
         studentDAO.addStudentToCourse(matricule, courseId);
     }
+
+    public List<Student> filterStudentsByName(String name) {
+        return studentDAO.findByNameContainingIgnoreCase(name);
+    }
 }

@@ -4,6 +4,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 
@@ -28,7 +29,7 @@ public class Teacher {
     private Long id;
     private String product;
     private int quantity;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "student_id") // student_id est la clé étrangère qui relie les tables TEACHER et STUDENT
     private Student student;
 }

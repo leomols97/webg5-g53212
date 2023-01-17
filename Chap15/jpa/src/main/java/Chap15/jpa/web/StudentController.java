@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import Chap15.jpa.DB.dto.Course;
 import Chap15.jpa.DB.dto.Student;
@@ -70,5 +71,10 @@ public class StudentController {
             return "erreur";
         }
         return "student";
+    }
+
+    @GetMapping("/students/filter")
+    public List<Student> filterStudents(@RequestParam String name) {
+        return studentService.filterStudentsByName(name);
     }
 }
