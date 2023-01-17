@@ -29,6 +29,8 @@ import lombok.Setter;
 public class Course {
 
     @Id
+    @NotNull(message = "Le sigle du cours ne peut pas être null !")
+    @NotEmpty(message = "Le sigle du cours ne peut pas être vide !")
     private String id;
 
     @NotNull(message = "Le titre du cours ne peut pas être null !")
@@ -39,6 +41,7 @@ public class Course {
     @Range(min = 1, max = 10, message = "Le nombre d'ECTS doit être un nombre compris entre 1 et 10 compris !")
     private int ECTS;
 
+    @NotEmpty(message = "Vous devez sélectionner au moins 1 étudiant !")
     @NotNull(message = "Vous devez sélectionner au moins 1 étudiant !")
     @ManyToMany(mappedBy = "courses", cascade = CascadeType.ALL)
     @JsonBackReference

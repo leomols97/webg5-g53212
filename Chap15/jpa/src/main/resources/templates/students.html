@@ -37,63 +37,70 @@
                 </tr>
             </table>
 
-            <form method="post" th:action="@{/students/add}" th:object="${student}">
-                <div>
-                    <label for="matricule">Matricule :</label><br>
-                    <input type="text" th:field="*{matricule}" id="matricule" class="form-control"><br>
-                    <span style="color: red" th:errors="*{matricule}" class="errorMsg">erreur</span>
-                </div>
-                <div>
-                    <label for="name">Nom :</label><br>
-                    <input type="text" th:field="*{name}" id="name" class="form-control"><br>
-                    <span style="color: red" th:errors="*{name}" class="errorMsg">erreur</span>
-                </div>
-                <div>
-                    <div class="form-group">
-                        <label for="genre">Genre</label>
-                        <div class="form-check">
-                            <input type="radio" class="form-check-input" th:field="*{genre}" th:value="'M'" id="M">
-                            <label class="form-check-label" for="M">Male</label>
-                        </div>
-                        <div class="form-check">
-                            <input type="radio" class="form-check-input" th:field="*{genre}" th:value="'F'" id="F">
-                            <label class="form-check-label" for="F">Female</label>
-                        </div>
-                    </div>
-                    <span style="color: red" th:errors="*{genre}" class="errorMsg">erreur</span>
-                </div>
-                <div>
-                    <div class="form-group">
-                        <label for="section">Section</label>
-                        <div class="form-check">
-                            <input type="radio" class="form-check-input" th:field="*{section}" th:value="'GESTION'"
-                                id="GESTION">
-                            <label class="form-check-label" for="GESTION">Gestion</label>
-                        </div>
-                        <div class="form-check">
-                            <input type="radio" class="form-check-input" th:field="*{section}" th:value="'RESEAUX'"
-                                id="RESEAUX">
-                            <label class="form-check-label" for="RESEAUX">Réseaux</label>
-                        </div>
-                        <div class="form-check">
-                            <input type="radio" class="form-check-input" th:field="*{section}" th:value="'INDUSTRIEL'"
-                                id="INDUSTRIEL">
-                            <label class="form-check-label" for="INDUSTRIEL">Industriel</label>
-                        </div>
-                    </div>
-                    <span style="color: red" th:errors="*{section}" class="errorMsg">erreur</span>
+            <div th:if="${studentsList != null}">
+                <form method="post" th:action="@{/students/add}" th:object="${student}">
                     <div>
-                        <label for="name">Cours dans le(s)quel(s) inscrire l'étudiant :</label><br>
-                        <select class="form-control" th:field="*{courses}" multiple="multiple">
-                            <option th:each="course : ${coursesList}" th:field="*{courses}" th:value="${course.id}"
-                                th:text="|${course.id} - ${course.title}|">
-                            </option>
-                        </select>
-                        <span style="color: red" th:errors="*{courses}" class="errorMsg">erreur</span>
+                        <label for="matricule">Matricule :</label><br>
+                        <input type="text" th:field="*{matricule}" id="matricule" class="form-control"><br>
+                        <span style="color: red" th:errors="*{matricule}" class="errorMsg">erreur</span>
                     </div>
-                </div>
-                <button class="btn btn-primary" type="submit">Ajouter</button>
-            </form>
+                    <div>
+                        <label for="name">Nom :</label><br>
+                        <input type="text" th:field="*{name}" id="name" class="form-control"><br>
+                        <span style="color: red" th:errors="*{name}" class="errorMsg">erreur</span>
+                    </div>
+                    <div>
+                        <div class="form-group">
+                            <label for="genre">Genre</label>
+                            <div class="form-check">
+                                <input type="radio" class="form-check-input" th:field="*{genre}" th:value="'M'" id="M">
+                                <label class="form-check-label" for="M">Male</label>
+                            </div>
+                            <div class="form-check">
+                                <input type="radio" class="form-check-input" th:field="*{genre}" th:value="'F'" id="F">
+                                <label class="form-check-label" for="F">Female</label>
+                            </div>
+                        </div>
+                        <span style="color: red" th:errors="*{genre}" class="errorMsg">erreur</span>
+                    </div>
+                    <div>
+                        <div class="form-group">
+                            <label for="section">Section</label>
+                            <div class="form-check">
+                                <input type="radio" class="form-check-input" th:field="*{section}" th:value="'GESTION'"
+                                    id="GESTION">
+                                <label class="form-check-label" for="GESTION">Gestion</label>
+                            </div>
+                            <div class="form-check">
+                                <input type="radio" class="form-check-input" th:field="*{section}" th:value="'RESEAUX'"
+                                    id="RESEAUX">
+                                <label class="form-check-label" for="RESEAUX">Réseaux</label>
+                            </div>
+                            <div class="form-check">
+                                <input type="radio" class="form-check-input" th:field="*{section}"
+                                    th:value="'INDUSTRIEL'" id="INDUSTRIEL">
+                                <label class="form-check-label" for="INDUSTRIEL">Industriel</label>
+                            </div>
+                        </div>
+                        <span style="color: red" th:errors="*{section}" class="errorMsg">erreur</span>
+                    </div>
+                    <div>
+                        <div class="form-group">
+                            <label for="courses">Sélectionnez les cours auxquels l'étudiant doit assister :</label><br>
+                            <div th:each="course : ${coursesList}">
+                                <input type="checkbox" th:value="${course.id}" th:name="courses"
+                                    th:checked="${session.selectedCourses.contains(course)}" />
+                                <label th:text="${course.title}"></label>
+                            </div>
+                            <span style="color: red" th:errors="*{courses}" class="errorMsg">erreur</span>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary" type="submit">Ajouter</button>
+                </form>
+            </div>
+        </div>
+        <div th:unless="${studentsList != null}">
+            <div th:text="Aucun étudant n'existe dans la base de données. Créez-en un d'abord !"></div>
         </div>
     </div>
 

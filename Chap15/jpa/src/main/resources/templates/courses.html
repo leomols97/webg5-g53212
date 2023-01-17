@@ -41,43 +41,42 @@
                 </tr>
             </table>
 
-            <form method="post" th:action="@{/courses/add}" th:object="${course}">
-                <div>
-                    <label for="id">Sigle :</label><br>
-                    <input type="text" th:field="*{id}" id="id" class="form-control"><br>
-                    <span style="color: red" th:errors="*{id}" class="errorMsg">erreur</span>
-                </div>
-                <div>
-                    <label for="name">Title :</label><br>
-                    <input type="text" th:field="*{title}" id="title" class="form-control"><br>
-                    <div th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></div>
-                </div>
-                <div>
-                    <label for="name">ECTS :</label><br>
-                    <input type="number" th:field="*{ECTS}" id="ects" class="form-control"><br>
-                    <span style="color: red" th:errors="*{ECTS}" class="errorMsg">erreur</span>
-                    <div th:if="${#fields.hasErrors('ECTS')}" th:errors="*{ECTS}"></div>
-                </div>
-                <div>
-                    <label for="name">Etudiants à inscrire à ce cours :</label><br>
-                    <select class="form-control" th:field="*{students}" multiple="multiple">
-                        <option th:each="student : ${studentsList}" th:field="*{students}"
-                            th:value="${student.matricule}" th:text="|${student.matricule} - ${student.name}|">
-                        </option>
-                    </select>
-                    <span style="color: red" th:errors="*{students}" class="errorMsg">erreur</span>
-                </div>
-
-                <!-- <div>
-                    <label>Étudiants :</label>
-                    <div th:each="course : ${courses}">
-                        <input style="color: red" type="checkbox" th:field="*{courses}" th:value="${course}"
-                            th:text="|${course.id} - ${course.title}|" />
+            <div th:if="${coursesList != null}">
+                <form method="post" th:action="@{/courses/add}" th:object="${course}">
+                    <div>
+                        <label for="id">Sigle :</label><br>
+                        <input type="text" th:field="*{id}" id="id" class="form-control"><br>
+                        <span style="color: red" th:errors="*{id}" class="errorMsg">erreur</span>
                     </div>
-                </div> -->
-
-                <button class="btn btn-primary" type="submit">Ajouter</button>
-            </form>
+                    <div>
+                        <label for="name">Title :</label><br>
+                        <input type="text" th:field="*{title}" id="title" class="form-control"><br>
+                        <span style="color: red" th:errors="*{id}" class="errorMsg">erreur</span>
+                    </div>
+                    <div>
+                        <label for="name">ECTS :</label><br>
+                        <input type="number" th:field="*{ECTS}" id="ects" class="form-control"><br>
+                        <span style="color: red" th:errors="*{ECTS}" class="errorMsg">erreur</span>
+                    </div>
+                    <div>
+                        <div class="form-group">
+                            <label for="students">Etudiants à inscrire à ce cours :</label><br>
+                            <div th:each="student : ${studentsList}">
+                                <input type="checkbox" th:value="${student.matricule}" th:name="students"
+                                    th:checked="${session.selectedCourses.contains(student)}" />
+                                <label th:text="${student.matricule}"></label>
+                            </div>
+                            <span style="color: red" th:errors="*{students}" class="errorMsg">erreur</span>
+                        </div>
+                    </div>
+                    <div>
+                        <button class="btn btn-primary" type="submit">Ajouter</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div th:unless="${coursesList != null}">
+            <div th:text="Aucun cours n'existe dans la base de données. Créez-en un d'abord !"></div>
         </div>
 
         <!-- <div id="responseData">

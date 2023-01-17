@@ -13,6 +13,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.persistence.FetchType;
 import org.hibernate.validator.constraints.Range;
@@ -49,11 +50,11 @@ public class Student {
     @NotNull(message = "Ce champ ne peut pas être null !")
     private String name;
 
-    @NotNull(message = "Vous avez oublié de sélectionner le genre de l'étudiant !")
+    @NotNull(message = "Vous avez oublié de sélectionner le genre !")
     @Enumerated(EnumType.STRING)
     private Genre genre;
 
-    @NotNull(message = "Vous avez oublié de sélectionner la section de l'étudiant !")
+    @NotNull(message = "Vous avez oublié de sélectionner la section !")
     @Enumerated(EnumType.STRING)
     private Section section;
 
@@ -74,6 +75,8 @@ public class Student {
     // @ManyToMany(mappedBy = "student", cascade = CascadeType.ALL)
     // private List<Course> courses;
 
+    @NotNull(message = "Vous avez oublié de sélectionner au moins un cours !")
+    @NotEmpty(message = "Vous avez oublié de sélectionner au moins un cours !")
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(name = "student_course", joinColumns = @JoinColumn(name = "student_id"), inverseJoinColumns = @JoinColumn(name = "course_id"))
     @JsonManagedReference
