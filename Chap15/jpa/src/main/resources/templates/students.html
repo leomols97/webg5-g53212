@@ -14,36 +14,26 @@
         <div></div>
 
         <div id="requestData">
-
-            <!-- <table class="table" v-if="listOfStudents.length > 0">
-                <tr>
-                    <th scope="col">Matricule</th>
-                    <th scope="col">Name</th>
-                    <th scope="col">Genre</th>
-                    <th scope="col">Section</th>
-                </tr>
-                <tr :value="student" v-for="student in listOfStudents">
-                    <td scope="row">{{ student.matricule }}</td>
-                    <td><a th:href="@{/students/{matricule}(matricule=${student.matricule})}">{{ student.name }}</a>
-                    </td>
-                    <td>{{ student.genre }}</td>
-                    <td>{{ student.section }}</td>
-                </tr>
-            </table> -->
-
             <table class="table">
                 <tr>
                     <th>Matricule</th>
                     <th>Name</th>
                     <th>Genre</th>
                     <th>Section</th>
+                    <th for="name">Cours de l'étudiant :</th><br>
                 </tr>
-                <tr th:each="student : ${listOfStudents}">
+                <tr th:each="student : ${studentsList}">
                     <td th:text="${student.matricule}"></td>
                     <td><a th:href="@{/students/{matricule}(matricule=${student.matricule})}"
                             th:text="${student.name}"></a></td>
                     <td th:text="${student.genre}"></td>
                     <td th:text="${student.section}"></td>
+                    <td>
+                        <select th:field="${student.courses}">
+                            <option th:each="course : ${student.courses}" th:value="|${course.id} - ${course.title}"
+                                th:text="|${course.id} - ${course.title}"></option>
+                        </select>
+                    </td>
                 </tr>
             </table>
 
@@ -69,12 +59,6 @@
                             <input type="radio" class="form-check-input" th:field="*{genre}" th:value="'F'" id="F">
                             <label class="form-check-label" for="F">Female</label>
                         </div>
-                        <div th:if="${student.genre == 'M'}" class="text-info">
-                            <p>Vous avez sélectionné 'Homme'</p>
-                        </div>
-                        <div th:if="${student.genre == 'F'}" class="text-info">
-                            <p>Vous avez sélectionné 'Femme'</p>
-                        </div>
                     </div>
                     <span style="color: red" th:errors="*{genre}" class="errorMsg">erreur</span>
                 </div>
@@ -98,65 +82,18 @@
                         </div>
                     </div>
                     <span style="color: red" th:errors="*{section}" class="errorMsg">erreur</span>
+                    <div>
+                        <label for="name">Cours dans le(s)quel(s) inscrire l'étudiant :</label><br>
+                        <select class="form-control" th:field="*{courses}" multiple="multiple">
+                            <option th:each="course : ${coursesList}" th:field="*{courses}" th:value="${course.id}"
+                                th:text="|${course.id} - ${course.title}|">
+                            </option>
+                        </select>
+                        <span style="color: red" th:errors="*{courses}" class="errorMsg">erreur</span>
+                    </div>
                 </div>
                 <button class="btn btn-primary" type="submit">Ajouter</button>
             </form>
-
-            <template>
-                <div>
-                    <div>
-                        <label for="search-input">Rechercher un étudiant :</label>
-                        <input type="text" id="search-input" v-model="searchTerm" @input="filterStudents" />
-                    </div>
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th>Matricule</th>
-                                <th>Nom</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr v-for="student in filteredStudents" :key="student.matricule">
-                                <td>{{ student.matricule }}</td>
-                                <td>{{ student.name }}</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </template>
-
-            <script>
-                export default {
-                    data() {
-                        return {
-                            listOfStudents: [],
-                            filterKey: '',
-                            students: [], // La liste des étudiants à afficher
-                        }
-                    },
-                    computed: {
-                        filteredStudents() {
-                            return requestData.listOfStudents = request.data;
-                            // return this.students.filter(student => student.name.toLowerCase().includes(this.filterKey.toLowerCase()))
-                        }
-                    },
-                    methods: {
-                        filterStudents() {
-                            // Votre logique de filtrage ici
-                        }
-                    },
-                    created() {
-                        axios.get('/api/studentsList')
-                            .then(response => {
-                                this.etudiants = response.data;
-                            })
-                            .catch(error => {
-                                console.log(error);
-                            });
-                    }
-                }
-            </script>
-
         </div>
     </div>
 
