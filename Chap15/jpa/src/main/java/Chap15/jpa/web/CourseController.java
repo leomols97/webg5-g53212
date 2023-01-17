@@ -2,6 +2,8 @@ package Chap15.jpa.web;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,18 +47,18 @@ public class CourseController {
         if (errors.hasErrors()) {
             // Les 2 lignes suivantes sont pcq il faut redonner la liste des cours au modèle
             // car on recharge la page
-            model.addAttribute("listOfCourses", courseService.getCourses());
+            model.addAttribute("coursesList", courseService.getCourses());
             return "courses";
         } else {
             // Eviter qu'un cours ne soit ajouté 2 fois
             // On cherche les ids de tous les cours et on compare avec l'id du cours à
             // ajouter
-            List<Course> courses = courseService.getCourses();
-            List<String> coursesIds = new ArrayList<>();
-            for (Course c : courses)
-                coursesIds.add(c.getId());
-            if (!coursesIds.contains(course.getId()))
+            Optional<Course> existingCourse = courseService.findCourseByIdOPTIONAL(course.getId());
+            if (existingCourse.isPresent()) {
+                course = existingCourse.get();
+            } else {
                 courseService.addCourse(course);
+            }
 
             // Eviter qu'un étudiant ne soit ajouté 2 fois
             // On cherche les matricules de tous les étudiants du cours à ajouter et on
@@ -64,7 +66,7 @@ public class CourseController {
             List<Student> studentsOfThisCourse = studentService.findStudentsByCourseId(course.getId());
             for (Student student : students) {
                 if (!studentsOfThisCourse.contains(student)) {
-                    studentService.addStudentToCourse(student.getMatricule(), course.getId());
+                    studentService.addCourseToStudent(student.getMatricule(), course.getId());
                 }
             }
         }

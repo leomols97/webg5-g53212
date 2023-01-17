@@ -1,7 +1,7 @@
 var requestData = new Vue({
     el: '#requestData',
     data: {
-        listOfCourses: [],
+        coursesList: [],
         courseModel: "",
         id: 0,
         title: "",
@@ -18,7 +18,7 @@ var requestData = new Vue({
             console.log("Appel Rest COURSES");
             axios.get(url)
                 .then(function (request) {
-                    requestData.listOfCourses = request.data;
+                    requestData.coursesList = request.data;
                     console.log("courses", request.data);
                 })
                 .catch(function (error) {

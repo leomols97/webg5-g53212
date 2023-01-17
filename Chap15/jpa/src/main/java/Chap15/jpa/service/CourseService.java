@@ -1,6 +1,7 @@
 package Chap15.jpa.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,6 +20,10 @@ public class CourseService {
 
     public Course findCourseById(String courseId) {
         return courseDAO.findCourseById(courseId);
+    }
+
+    public Optional<Course> findCourseByIdOPTIONAL(String courseId) {
+        return courseDAO.findCourseByIdOPTIONAL(courseId);
     }
 
     public List<Course> getCourses() {

@@ -12,6 +12,7 @@ import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.Range;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -41,5 +42,12 @@ public class Course {
     @NotNull(message = "Vous devez sélectionner au moins 1 étudiant !")
     @ManyToMany(mappedBy = "courses", cascade = CascadeType.ALL)
     @JsonBackReference
+    @JsonIgnore // Pour éviter les erreurs de boucle infinie car Course appellerait la méthode
+                // toString de Student qui appellerait la méthode toString de Course
     private List<Student> students = new ArrayList<>();
+
+    @Override
+    public String toString() {
+        return "Course [id=" + id + ", title=" + title + ", ECTS=" + ECTS + "]";
+    }
 }

@@ -2,6 +2,9 @@ package Chap15.jpa.Repositories;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
@@ -24,4 +27,9 @@ public interface StudentRepository extends CrudRepository<Student, String> {
     // en paramètre
     @Query("SELECT s FROM Student s WHERE s.name LIKE %:name%")
     List<Student> findByNameContainingIgnoreCase(String name);
+
+    @Modifying
+    @Transactional
+    @Query(value = "INSERT INTO STUDENT_COURSE (STUDENT_ID, COURSE_ID) VALUES (?,?)", nativeQuery = true)
+    void addCourseToStudent(String matricule, String courseId);
 }

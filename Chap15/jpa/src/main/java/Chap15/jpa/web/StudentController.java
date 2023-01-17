@@ -2,6 +2,8 @@ package Chap15.jpa.web;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,21 +52,18 @@ public class StudentController {
         if (errors.hasErrors()) {
             // Les 2 lignes suivantes sont pcq il faut redonner la liste des cours au modèle
             // car on recharge la page
-            List<Student> studentsList = studentService.getStudents();
-            model.addAttribute("studentsList", studentsList);
+            model.addAttribute("studentsList", studentService.getStudents());
             return "students";
         } else {
-            studentService.addStudent(student);
-
             // Eviter qu'un student ne soit ajouté 2 fois
-            // On cherche les ids de tous les students et on compare avec l'id du student à
-            // ajouter
-            List<Student> students = studentService.getStudents();
-            List<String> studentsIds = new ArrayList<>();
-            for (Student s : students)
-                studentsIds.add(s.getMatricule());
-            if (!studentsIds.contains(student.getMatricule()))
+            // On cherche les ids de tous les students et on check si l'id du student à
+            // ajouter est déjà présent dans la DB
+            Optional<Student> existingStudent = studentService.findStudentByMatriculeOPTIONAL(student.getMatricule());
+            if (existingStudent.isPresent()) {
+                student = existingStudent.get();
+            } else {
                 studentService.addStudent(student);
+            }
 
             // Eviter qu'un cours ne soit ajouté 2 fois
             // On cherche les ids de tous les cours de l'étudiant à ajouter et on

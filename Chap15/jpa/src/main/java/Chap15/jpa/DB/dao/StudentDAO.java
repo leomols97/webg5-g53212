@@ -8,6 +8,7 @@ import Chap15.jpa.Repositories.CourseRepository;
 import Chap15.jpa.Repositories.StudentRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public class StudentDAO {
@@ -23,7 +24,11 @@ public class StudentDAO {
     }
 
     public Student findStudentByMatricule(String StudentMatricule) {
-        return studentRepository.findById(StudentMatricule).get();
+        return studentRepository.findById(StudentMatricule).orElse(null);
+    }
+
+    public Optional<Student> findStudentByMatriculeOPTIONAL(String StudentMatricule) {
+        return studentRepository.findById(StudentMatricule);
     }
 
     public Student saveStudent(Student student) {
@@ -34,8 +39,8 @@ public class StudentDAO {
         return studentRepository.findStudentsByCourseId(courseId);
     }
 
-    public void addStudentToCourse(String matricule, String courseId) {
-        courseRepository.addStudentToCourse(matricule, courseId);
+    public void addCourseToStudent(String matricule, String courseId) {
+        studentRepository.addCourseToStudent(matricule, courseId);
     }
 
     public void deleteStudentByMatricule(String studentMatricule) {
@@ -44,5 +49,9 @@ public class StudentDAO {
 
     public List<Student> findByNameContainingIgnoreCase(String name) {
         return studentRepository.findByNameContainingIgnoreCase(name);
+    }
+
+    public void updateStudent(Student student) {
+        studentRepository.save(student);
     }
 }

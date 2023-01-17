@@ -21,7 +21,7 @@ import lombok.Setter;
  * Cette classe a pour simple but de montrer un exemple d'utilisaiton d'une
  * relation 1-1 UNIDIRECTIONNELLE avec Student
  */
-public class Schooladdress {
+public class SchoolAddress {
 
     @Id
     @NotNull(message = "Le nom de l'école ne peut pas être null")
@@ -41,6 +41,6 @@ public class Schooladdress {
     private String city;
 
     @NotNull(message = "Le code postal ne peut pas être null")
-    @Size(min = 2, max = 50, message = "Le code postal doit avoir entre 2 et 50 caractères")
-    private String post_code;
+    @Range(min = 1000, max = 99999, message = "Le code postal doit être compris entre 1000 et 9999")
+    private int post_code;
 }

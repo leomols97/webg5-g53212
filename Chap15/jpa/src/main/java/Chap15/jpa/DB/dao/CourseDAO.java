@@ -7,6 +7,7 @@ import Chap15.jpa.DB.dto.Course;
 import Chap15.jpa.Repositories.CourseRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public class CourseDAO {
@@ -19,7 +20,11 @@ public class CourseDAO {
     }
 
     public Course findCourseById(String courseId) {
-        return courseRepository.findById(courseId).get();
+        return courseRepository.findById(courseId).orElse(null);
+    }
+
+    public Optional<Course> findCourseByIdOPTIONAL(String courseId) {
+        return courseRepository.findById(courseId);
     }
 
     public Course saveCourse(Course course) {

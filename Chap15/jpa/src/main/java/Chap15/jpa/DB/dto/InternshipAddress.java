@@ -23,7 +23,7 @@ import lombok.Setter;
  * Cette classe a pour simple but de montrer un exemple d'utilisation d'une
  * relation 1-1 BIDIRECTIONNELLE avec Student
  */
-public class Internshipaddress {
+public class InternshipAddress {
 
     @Id
     @NotNull(message = "Le nom de l'entreprise ne peut pas être null")
@@ -43,8 +43,8 @@ public class Internshipaddress {
     private String city;
 
     @NotNull(message = "Le code postal ne peut pas être null")
-    @Size(min = 2, max = 50, message = "Le code postal doit avoir entre 2 et 50 caractères")
-    private String post_code;
+    @Range(min = 1000, max = 99999, message = "Le code postal doit être compris entre 1000 et 9999")
+    private int post_code;
 
     @OneToOne
     @JoinColumn(name = "student_id") // student_id est la clé étrangère qui relie les tables INTERNSHIP_ADDRESS et

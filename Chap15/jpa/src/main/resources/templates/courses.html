@@ -12,10 +12,10 @@
     <div class="grid grid-cols-3 gap-20">
 
         <div></div>
-        <div id="requestData"> <!-- v-if="listOfCourses.length > 0"> -->
+        <div id="requestData"> <!-- v-if="coursesList.length > 0"> -->
 
             <!-- <select v-on:change="showCourse()" v-model="courseModel">
-                <option :value="course" v-for="course in listOfCourses">
+                <option :value="course" v-for="course in coursesList">
                     {{ course.title }}
                 </option>
             </select> -->
@@ -67,6 +67,14 @@
                     </select>
                     <span style="color: red" th:errors="*{students}" class="errorMsg">erreur</span>
                 </div>
+
+                <!-- <div>
+                    <label>Étudiants :</label>
+                    <div th:each="course : ${courses}">
+                        <input style="color: red" type="checkbox" th:field="*{courses}" th:value="${course}"
+                            th:text="|${course.id} - ${course.title}|" />
+                    </div>
+                </div> -->
 
                 <button class="btn btn-primary" type="submit">Ajouter</button>
             </form>

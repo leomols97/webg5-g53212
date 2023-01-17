@@ -17,6 +17,7 @@ import javax.validation.constraints.NotNull;
 import javax.persistence.FetchType;
 import org.hibernate.validator.constraints.Range;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import lombok.AllArgsConstructor;
@@ -57,18 +58,18 @@ public class Student {
     private Section section;
 
     // Test pour montrer une relation UNIDIRECTIONNELLE 1-1 vers l'entité
-    // Schooladdress.
+    // SchoolAddress.
     // Il n'y a pas de référence à l'entité Student dans l'entité Address
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "school_address") // school_address est la clé étrangère qui relie les tables STUDENT et
                                          // SCHOOLADDRESS
-    private Schooladdress school_address;
+    private SchoolAddress school_address;
 
     // Test pour montrer une relation BIDIRECTIONNELLE 1-1 vers l'entité
     // Internshipaddress.
     @OneToOne(mappedBy = "student", cascade = CascadeType.ALL) // student est la clé étrangère qui relie les tables
                                                                // STUDENT et INTERNSHIPADDRESS
-    private Internshipaddress internship_address;
+    private InternshipAddress internship_address;
 
     // @ManyToMany(mappedBy = "student", cascade = CascadeType.ALL)
     // private List<Course> courses;
@@ -76,5 +77,12 @@ public class Student {
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(name = "student_course", joinColumns = @JoinColumn(name = "student_id"), inverseJoinColumns = @JoinColumn(name = "course_id"))
     @JsonManagedReference
+    @JsonIgnore // Pour éviter les erreurs de boucle infinie car Student appellerait la méthode
+                // toString de Course qui appellerait la méthode toString de Student
     private List<Course> courses = new ArrayList<>();
+
+    @Override
+    public String toString() {
+        return "Student [matricule=" + matricule + ", name=" + name + ", genre=" + genre + ", section=" + section + "]";
+    }
 }

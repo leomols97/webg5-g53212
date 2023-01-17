@@ -1,6 +1,7 @@
 package Chap15.jpa.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,6 +22,10 @@ public class StudentService {
         return studentDAO.findStudentByMatricule(matricule);
     }
 
+    public Optional<Student> findStudentByMatriculeOPTIONAL(String matricule) {
+        return studentDAO.findStudentByMatriculeOPTIONAL(matricule);
+    }
+
     public List<Student> getStudents() {
         return studentDAO.getAllStudents();
     }
@@ -33,11 +38,15 @@ public class StudentService {
         return studentDAO.findStudentsByCourseId(courseId);
     }
 
-    public void addStudentToCourse(String matricule, String courseId) {
-        studentDAO.addStudentToCourse(matricule, courseId);
+    public void addCourseToStudent(String matricule, String courseId) {
+        studentDAO.addCourseToStudent(matricule, courseId);
     }
 
     public List<Student> filterStudentsByName(String name) {
         return studentDAO.findByNameContainingIgnoreCase(name);
+    }
+
+    public void updateStudent(Student student) {
+        studentDAO.updateStudent(student);
     }
 }

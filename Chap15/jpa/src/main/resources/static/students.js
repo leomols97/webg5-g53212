@@ -1,7 +1,7 @@
 var requestData = new Vue({
     el: '#requestData',
     data: {
-        listOfStudents: [],
+        studentsList: [],
         studentModel: "",
         matricule: 0,
         name: "",
@@ -18,7 +18,7 @@ var requestData = new Vue({
             console.log("Appel Rest STUDENTS");
             axios.get(url)
                 .then(function (request) {
-                    requestData.listOfStudents = request.data;
+                    requestData.studentsList = request.data;
                     console.log("students", request.data);
                 })
                 .catch(function (error) {
