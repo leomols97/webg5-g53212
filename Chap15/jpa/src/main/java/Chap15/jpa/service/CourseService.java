@@ -17,11 +17,23 @@ public class CourseService {
     public CourseService() {
     }
 
+    public Course findCourseById(String courseId) {
+        return courseDAO.findCourseById(courseId);
+    }
+
     public List<Course> getCourses() {
         return courseDAO.getAllCourses();
     }
 
     public Course addCourse(Course course) {
         return courseDAO.saveCourse(course);
+    }
+
+    public void addStudentToCourse(String matricule, String courseId) {
+        courseDAO.addStudentToCourse(matricule, courseId);
+    }
+
+    public List<Course> findCoursesForThisStudent(String matricule) {
+        return courseDAO.findCoursesForThisStudent(matricule);
     }
 }

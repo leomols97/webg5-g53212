@@ -10,5 +10,5 @@ import Chap15.jpa.DB.dto.Student;
 
 public interface StudentRepository extends CrudRepository<Student, String> {
     @Query("SELECT s FROM Student s JOIN s.courses sc WHERE sc.id = :courseId")
-    List<Student> findByCourse(@Param("courseId") String courseId);
+    List<Student> findStudentsByCourseId(@Param("courseId") String courseId);
 }

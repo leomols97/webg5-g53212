@@ -6,6 +6,7 @@ var requestData = new Vue({
         id: 0,
         title: "",
         ECTS: '',
+        studentsList: 0,
     },
     mounted() {
         this.listCourses();

@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -12,11 +11,13 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.Range;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
@@ -42,15 +43,15 @@ public class Student {
     // "employee_id_seq")
     private String matricule;
 
-    @NotBlank(message = "Ce champ ne peut pas être vide")
-    @NotNull(message = "Ce champ ne peut pas être null")
+    @NotBlank(message = "Ce champ ne peut pas être vide !")
+    @NotNull(message = "Ce champ ne peut pas être null !")
     private String name;
 
-    @NotNull(message = "Ce champ ne peut pas être null")
+    @NotNull(message = "Vous avez oublié de sélectionner le genre de l'étudiant !")
     @Enumerated(EnumType.STRING)
     private Genre genre;
 
-    @NotNull(message = "Ce champ ne peut pas être null")
+    @NotNull(message = "Vous avez oublié de sélectionner la section de l'étudiant !")
     @Enumerated(EnumType.STRING)
     private Section section;
 
@@ -73,5 +74,6 @@ public class Student {
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "student_course", joinColumns = @JoinColumn(name = "student_id"), inverseJoinColumns = @JoinColumn(name = "course_id"))
+    @JsonManagedReference
     private List<Course> courses = new ArrayList<>();
 }

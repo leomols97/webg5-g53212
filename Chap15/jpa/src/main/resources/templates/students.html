@@ -15,7 +15,7 @@
 
         <div id="requestData">
 
-            <table class="table" v-if="listOfStudents.length > 0">
+            <!-- <table class="table" v-if="listOfStudents.length > 0">
                 <tr>
                     <th scope="col">Matricule</th>
                     <th scope="col">Name</th>
@@ -29,20 +29,34 @@
                     <td>{{ student.genre }}</td>
                     <td>{{ student.section }}</td>
                 </tr>
+            </table> -->
+
+            <table class="table">
+                <tr>
+                    <th>Matricule</th>
+                    <th>Name</th>
+                    <th>Genre</th>
+                    <th>Section</th>
+                </tr>
+                <tr th:each="student : ${listOfStudents}">
+                    <td th:text="${student.matricule}"></td>
+                    <td><a th:href="@{/students/{matricule}(matricule=${student.matricule})}"
+                            th:text="${student.name}"></a></td>
+                    <td th:text="${student.genre}"></td>
+                    <td th:text="${student.section}"></td>
+                </tr>
             </table>
 
             <form method="post" th:action="@{/students/add}" th:object="${student}">
                 <div>
                     <label for="matricule">Matricule :</label><br>
                     <input type="text" th:field="*{matricule}" id="matricule" class="form-control"><br>
-                    <!-- <input type="text" th:field="*{matricule}" th:errorclass="errorField" /> -->
-                    <span th:errors="*{matricule}" class="errorMsg">erreur</span>
+                    <span style="color: red" th:errors="*{matricule}" class="errorMsg">erreur</span>
                 </div>
                 <div>
                     <label for="name">Nom :</label><br>
                     <input type="text" th:field="*{name}" id="name" class="form-control"><br>
-                    <!-- <input type="text" th:field="*{name}" th:errorclass="errorField" /> -->
-                    <span th:errors="*{name}" class="errorMsg">erreur</span>
+                    <span style="color: red" th:errors="*{name}" class="errorMsg">erreur</span>
                 </div>
                 <div>
                     <div class="form-group">
@@ -62,8 +76,7 @@
                             <p>Vous avez sélectionné 'Femme'</p>
                         </div>
                     </div>
-                    <!-- <input type="text" th:field="*{genre}" th:errorclass="errorField" /> -->
-                    <span th:errors="*{genre}" class="errorMsg">erreur</span>
+                    <span style="color: red" th:errors="*{genre}" class="errorMsg">erreur</span>
                 </div>
                 <div>
                     <div class="form-group">
@@ -84,10 +97,8 @@
                             <label class="form-check-label" for="INDUSTRIEL">Industriel</label>
                         </div>
                     </div>
-                    <!-- <input type="text" th:field="*{section}" th:errorclass="errorField" /> -->
-                    <span th:errors="*{section}" class="errorMsg">erreur</span>
+                    <span style="color: red" th:errors="*{section}" class="errorMsg">erreur</span>
                 </div>
-
                 <button class="btn btn-primary" type="submit">Ajouter</button>
             </form>
         </div>

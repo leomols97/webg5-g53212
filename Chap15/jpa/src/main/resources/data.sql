@@ -11,9 +11,9 @@ insert into InternshipAddress (name, street, number,  city, post_code)
     ('ChristianDior', ' Moi non plus ', 456, ' Bruxelles ', ' 2000 ');
 
 insert into Course (id, title, ECTS)
-    values ('ERPG5', 'Erp Gestion Q5', '5');
+    values ('ERPG5', 'Erp Gestion Q5', 5);
 insert into Course (id, title, ECTS)
-    values ('WEBG5', 'Web Gestion Q5', '5');
+    values ('WEBG5', 'Web Gestion Q5', 5);
 
 ALTER TABLE Student ADD COLUMN internship_address VARCHAR(255);
 ALTER TABLE Student ADD COLUMN courses text;

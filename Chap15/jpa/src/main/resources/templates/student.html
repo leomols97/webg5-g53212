@@ -7,13 +7,12 @@
     <header th:replace="~{layout.html::header}">
     </header>
 
-    <h1 th:text="${student.matricule}"></h1>
-    <h1 th:text="${student.name}"></h1>
-
     <div class="grid grid-cols-3 gap-20">
 
         <div></div>
         <div>
+            <h1 style="color: red; font-size: 28px; text-decoration: underline;" class="text-center prose lg:prose-xl"
+                th:text="|${student.matricule} - ${student.name}|"></h1>
             <table class="table">
                 <tr>
                     <th>Sigle</th>
@@ -23,7 +22,7 @@
                 <tr th:each="course : ${coursesForThisStudent}">
                     <td th:text="${course.id}"></td>
                     <td><a th:href="@{/courses/{id}(id=${course.id})}" th:text="${course.title}"></a></td>
-                    <td th:text="${course.ects}"></td>
+                    <td th:text="${course.ECTS}"></td>
                 </tr>
             </table>
         </div>
@@ -34,7 +33,7 @@
 
     </footer>
 
-    <script type="text/javascript" th:src="@{/courses.js}"></script>
+    <script type="text/javascript" th:src="@{/students.js}"></script>
 
 </body>
 

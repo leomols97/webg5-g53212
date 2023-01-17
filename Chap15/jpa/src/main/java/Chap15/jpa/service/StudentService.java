@@ -17,11 +17,23 @@ public class StudentService {
     public StudentService() {
     }
 
+    public Student findStudentByMatricule(String matricule) {
+        return studentDAO.findStudentByMatricule(matricule);
+    }
+
     public List<Student> getStudents() {
         return studentDAO.getAllStudents();
     }
 
     public Student addStudent(Student student) {
         return studentDAO.saveStudent(student);
+    }
+
+    public List<Student> findStudentsByCourseId(String courseId) {
+        return studentDAO.findStudentsByCourseId(courseId);
+    }
+
+    public void addStudentToCourse(String matricule, String courseId) {
+        studentDAO.addStudentToCourse(matricule, courseId);
     }
 }

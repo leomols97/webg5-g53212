@@ -1,24 +1,26 @@
 package Chap15.jpa.DB.dto;
 
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-
-import org.hibernate.validator.constraints.Range;
-
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import org.hibernate.validator.constraints.Range;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
@@ -27,14 +29,17 @@ public class Course {
 
     @Id
     private String id;
+
+    @NotNull(message = "Le titre du cours ne peut pas être null !")
+    @NotEmpty(message = "Le titre du cours ne peut pas être vide !")
     private String title;
-    @Range(min = 1, max = 10, message = "Le matricule doit être un nombre compris entre 1 et 10 compris !")
-    private String ECTS;
 
-    // @ManyToMany(mappedBy = "course", cascade = CascadeType.ALL)
-    // // @JoinColumn(name = "students")
-    // private List<Student> students;
+    @NotNull(message = "Le nombre d'ECTS ne peut pas être null !")
+    @Range(min = 1, max = 10, message = "Le nombre d'ECTS doit être un nombre compris entre 1 et 10 compris !")
+    private int ECTS;
 
+    @NotNull(message = "Vous devez sélectionner au moins 1 étudiant !")
     @ManyToMany(mappedBy = "courses", cascade = CascadeType.ALL)
+    @JsonBackReference
     private List<Student> students = new ArrayList<>();
 }
