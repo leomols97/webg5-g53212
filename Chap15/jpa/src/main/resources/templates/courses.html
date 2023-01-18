@@ -62,8 +62,7 @@
                         <div class="form-group">
                             <label for="students">Etudiants à inscrire à ce cours :</label><br>
                             <div th:each="student : ${studentsList}">
-                                <input type="checkbox" th:value="${student.matricule}" th:name="students"
-                                    th:checked="${session.selectedCourses.contains(student)}" />
+                                <input type="checkbox" th:value="${student.matricule}" th:name="students" />
                                 <label th:text="${student.matricule}"></label>
                             </div>
                             <span style="color: red" th:errors="*{students}" class="errorMsg">erreur</span>
@@ -76,7 +75,8 @@
             </div>
         </div>
         <div th:unless="${coursesList != null}">
-            <div th:text="Aucun cours n'existe dans la base de données. Créez-en un d'abord !"></div>
+            <div th:text="Aucun cours n'existe dans la base de données. Créez-en un d'abord !">Aucun cours n'existe dans
+                la base de données. Créez-en un d'abord !</div>
         </div>
 
         <!-- <div id="responseData">

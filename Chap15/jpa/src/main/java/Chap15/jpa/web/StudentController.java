@@ -1,5 +1,6 @@
 package Chap15.jpa.web;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -48,13 +49,16 @@ public class StudentController {
 
     @PostMapping("/students/add")
     public String addStudent(@Valid @ModelAttribute(name = "student") Student student, Errors errors, Model model,
-            HttpSession session) {
+            HttpSession session, @RequestParam(value = "courses", required = false) List<String> coursesIds) {
+        if (coursesIds == null) {
+            coursesIds = new ArrayList<>();
+        }
         if (errors.hasErrors()) {
             // Les 2 lignes suivantes sont pcq il faut redonner la liste des cours au modèle
             // car on recharge la page
             model.addAttribute("studentsList", studentService.getStudents());
             model.addAttribute("coursesList", courseService.getCourses());
-            session.setAttribute("selectedCourses", student.getCourses());
+            session.setAttribute("selectedCourses", courseService.getCourses());
             return "students";
         } else {
             // Eviter qu'un student ne soit ajouté 2 fois
@@ -66,12 +70,15 @@ public class StudentController {
             } else {
                 studentService.addStudent(student);
             }
-
             // Eviter qu'un cours ne soit ajouté 2 fois
             // On cherche les ids de tous les cours de l'étudiant à ajouter et on
             // compare avec l'id des cours à ajouter
             List<Course> coursesOfThisStudent = courseService.findCoursesForThisStudent(student.getMatricule());
-            for (Course course : student.getCourses()) {
+            List<Course> courses = new ArrayList<>();
+            for (String id : coursesIds) {
+                courses.add(courseService.findCourseById(id));
+            }
+            for (Course course : courses) {
                 if (!coursesOfThisStudent.contains(course)) {
                     courseService.addStudentToCourse(student.getMatricule(), course.getId());
                 }
