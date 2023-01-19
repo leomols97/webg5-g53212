@@ -1,0 +1,41 @@
+<html>
+
+<head th:replace="~{layout.html::head(titre='Détails étudiant')}">
+</head>
+
+<body>
+    <header th:replace="~{layout.html::header}">
+    </header>
+
+    <div class="grid grid-cols-3 gap-20">
+
+        <div></div>
+        <div>
+            <h1 style="color: red; font-size: 28px; text-decoration: underline;" class="text-center prose lg:prose-xl"
+                th:text="|${student.matricule} - ${student.name}|"></h1>
+            <table class="table">
+                <tr>
+                    <th>Sigle</th>
+                    <th>Titre</th>
+                    <th>ECTS</th>
+                </tr>
+                <tr th:each="course : ${coursesForThisStudent}">
+                    <td th:text="${course.id}"></td>
+                    <td><a th:href="@{/courses/{id}(id=${course.id})}" th:text="${course.title}"></a></td>
+                    <td th:text="${course.ECTS}"></td>
+                </tr>
+            </table>
+        </div>
+
+    </div>
+
+    <footer>
+
+    </footer>
+
+    <script type="text/javascript" th:src="@{/students.js}"></script>
+
+</body>
+
+
+</html>

@@ -1,0 +1,5 @@
+<p
+    th:href="${T(org.springframework.web.servlet.support.ServletUriComponentsBuilder).fromCurrentRequest().replaceQueryParam('lang','fr').toUriString()}">
+</p>
+<a th:href="@{/(lang=fr)}">Français</a>
+<a th:href="@{/(lang=en)}">English</a>

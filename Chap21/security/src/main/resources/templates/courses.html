@@ -1,0 +1,108 @@
+<html>
+
+<head th:replace="~{layout.html::head(titre='Liste des cours')}">
+</head>
+
+<body>
+    <header th:replace="~{layout.html::header}">
+    </header>
+
+    <h1>Cours</h1>
+
+    <div class="grid grid-cols-3 gap-20">
+
+        <div></div>
+        <div id="requestData"> <!-- v-if="coursesList.length > 0"> -->
+
+            <!-- <select v-on:change="showCourse()" v-model="courseModel">
+                <option :value="course" v-for="course in coursesList">
+                    {{ course.title }}
+                </option>
+            </select> -->
+
+            <table class="table">
+                <tr>
+                    <th>Sigle</th>
+                    <th>Titre</th>
+                    <th>ECTS</th>
+                    <th>Etudiants inscrits à ce cours</th>
+                </tr>
+                <tr th:each="course : ${coursesList}">
+                    <td th:text="${course.id}"></td>
+                    <td><a th:href="@{/courses/{id}(id=${course.id})}" th:text="${course.title}"></a></td>
+                    <td th:text="${course.ECTS}"></td>
+                    <td>
+                        <select th:field="${course.students}">
+                            <option th:each="student : ${course.students}"
+                                th:value="|${student.matricule} - ${student.name}"
+                                th:text="|${student.matricule} - ${student.name}"></option>
+                        </select>
+                    </td>
+                </tr>
+            </table>
+
+            <div th:if="${coursesList != null}">
+                <form method="post" th:action="@{/courses/add}" th:object="${course}">
+                    <div>
+                        <label for="id">Sigle :</label><br>
+                        <input type="text" th:field="*{id}" id="id" class="form-control"><br>
+                        <span style="color: red" th:errors="*{id}" class="errorMsg">erreur</span>
+                    </div>
+                    <div>
+                        <label for="name">Title :</label><br>
+                        <input type="text" th:field="*{title}" id="title" class="form-control"><br>
+                        <span style="color: red" th:errors="*{id}" class="errorMsg">erreur</span>
+                    </div>
+                    <div>
+                        <label for="name">ECTS :</label><br>
+                        <input type="number" th:field="*{ECTS}" id="ects" class="form-control"><br>
+                        <span style="color: red" th:errors="*{ECTS}" class="errorMsg">erreur</span>
+                    </div>
+                    <div>
+                        <div class="form-group">
+                            <label for="students">Etudiants à inscrire à ce cours :</label><br>
+                            <div th:each="student : ${studentsList}">
+                                <input type="checkbox" th:value="${student.matricule}" th:name="students" />
+                                <label th:text="${student.matricule}"></label>
+                            </div>
+                            <span style="color: red" th:errors="*{students}" class="errorMsg">erreur</span>
+                        </div>
+                    </div>
+                    <div>
+                        <button class="btn btn-primary" type="submit">Ajouter</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div th:unless="${coursesList != null}">
+            <div th:text="Aucun cours n'existe dans la base de données. Créez-en un d'abord !">Aucun cours n'existe dans
+                la base de données. Créez-en un d'abord !</div>
+        </div>
+
+        <!-- <div id="responseData">
+            <ul>
+                <li>Id : {{ course.id }}</li>
+                <li>Titre : {{ course.title }}</li>
+                <li>ECTS : {{ course.ects }}</li>
+                <li>
+                    <ul>Etudiants inscrits à ce cours :
+                        <option :value="course" v-for="student in studentsList">
+                            {{ student.name }}
+                        </option>
+                    </ul>
+                </li>
+            </ul>
+        </div> -->
+    </div>
+
+
+    <footer>
+
+    </footer>
+
+    <script type="text/javascript" th:src="@{/courses.js}"></script>
+
+</body>
+
+
+</html>
